@@ -1,21 +1,20 @@
-// Canvas related variables
+// View related variables
 var viewWidth = view.bounds.width;
 var viewHeight = view.bounds.height;
 var viewStartX = view.bounds.x;
 var viewStartY = view.bounds.y;
 var viewCenter = view.bounds.center;
-var viewPoint = 0;
 var startingViewCenter = view.bounds.center;
+var mousePoint = 0;
 
-// Grid Lines setting
+// Settings
+var zoomFactor = 2;
 var gridSize = 10;
 
-var path = new Path.Circle({
-	center: view.center,
-	radius: 30,
-	strokeColor: 'red'
-});
-
+// Canvas Object event inits. Events in canvasEvents.js
+var canvasObject = document.getElementById("networkCanvas");
+canvasObject.addEventListener("mousewheel", zoomCanvasHandler, false); // For IE, Chrome
+canvasObject.addEventListener("DOMMouseScroll", zoomCanvasHandler, false); // For Firefox
 
 function drawGridLines(){
     for(var i=0;i<=viewHeight;i=i+gridSize){
@@ -41,40 +40,65 @@ function onResize(event) {
     viewCenter = view.bounds.center;
 }
 
-drawGridLines();
-
-var myimage = document.getElementById("networkCanvas");
-myimage.addEventListener("mousewheel", MouseWheelHandler, false);
-
-function MouseWheelHandler(e) { 
-	// cross-browser wheel delta
-	var e = window.event || e; // old IE support
-	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-    
-    var oldZoom = view.zoom;
-
-    if ((delta == 1) && (view.zoom <= 10)){
-        view.zoom += delta / 10;
-    }
-
-    if ((delta == -1) && (view.zoom > 1)){
-        view.zoom += delta / 10;
-    }
-
-    var beta = oldZoom / view.zoom;
-    var pc = viewPoint - view.center;
-    var a = viewPoint - (pc  * beta) - view.center;
-    view.center += a;
-
-    if (view.zoom <= 1){
-        view.zoom = 1;
-        view.center = startingViewCenter;
-    }
-
-    console.log(view.zoom);
-
+function onClick(event){
+    console.log("yo");
 }
 
 function onMouseMove(event) {
-    viewPoint = event.point;
+    mousePoint = event.point;
+}
+
+function zoomCanvasHandler(e) { 
+	var e = window.event || e; // old IE support
+	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    var oldZoom = view.zoom;
+    var newZoom = view.zoom + (delta / zoomFactor);
+
+    if (newZoom < 1){
+        view.zoom = 1;
+        view.center = startingViewCenter;
+    }else if (newZoom > 10){
+        view.zoom = 10;
+    }else{
+        if ((view.zoom >= 1) && (view.zoom <= 10)){
+            view.zoom = newZoom;
+        }
+        var zoomRatio = oldZoom / newZoom;
+        var scaleDiff = mousePoint - view.center;
+        var offset = mousePoint - (scaleDiff  * zoomRatio) - view.center;
+        view.center += offset;
+    }
+}
+
+var doConnect = false;
+
+$(document).ready(function(){
+    drawGridLines();
+    drawElement("circle", null);
+});
+
+
+/*
+* Main function to draw a given element type. Renders element on canvas and
+* stores it in the global dictionary.
+*/
+var doConnect = false;
+function drawElement(elementType, imageName) {
+    if (elementType === "circle"){
+        pathElements = drawCircleElement(paper);
+        pathElements[1].onMouseDown = function(event){
+                                        doConnect = true;
+                                    };
+        pathElements[1].onMouseUp = function(event){
+                                        doConnect = false;
+                                    };
+
+        var group = new Group([pathElements[0], pathElements[1]]);
+        
+        group.onMouseDrag = function(event) {
+            if (!doConnect){
+                group.position += event.delta;
+            }
+        }
+    }
 }
