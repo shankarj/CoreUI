@@ -56,5 +56,5 @@ if (app.get('env') === 'development') {
   });
 }
 
-console.log("Started");
+console.log("App started");
 module.exports = app;

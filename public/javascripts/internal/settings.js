@@ -1,6 +1,6 @@
 var zoomFactor = 2;
 var gridSize = 10;
-var forwardConnectorColor = 'blue';
+var forwardConnectorColor = 'lightblue';
 var backwardConnectorColor = 'orange';
 var forwardConnectorThickness = 5;
 var backwardConnectorThickness = 5;
