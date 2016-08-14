@@ -5,7 +5,7 @@
     height: 0px;
     position: absolute;
     bottom: 0px;
-    margin-left: 30px;
+    margin-left: 25px;
     top: 30px;
     border-width: 25px;
     border-style: outset outset solid;
@@ -39,8 +39,14 @@
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
+.nav-item > a > h1, h2, h3, h4, h5, h6 {
     color: #00A074;
+}
+
+.card > ul > li {
+
+    margin-bottom: 1px;
+    background-color: darkgray;
 }
 
 nav {

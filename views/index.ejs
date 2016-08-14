@@ -34,7 +34,7 @@
     <nav class="navbar navbar-default" role="navigation">
 
 
-        <a href="#" class="btn btn-outline-secondary navbar-brand">i STACK <span>1.0</span></a>
+        <a href="#" class="btn btn-outline-secondary navbar-brand disabled">i STACK <span>1.0</span></a>
 
 
         <ul class="nav navbar-nav">
@@ -61,7 +61,7 @@
             <li class="nav-item">
                 <a href="#">
                     <h4>
-                        <span class="fa fa-cog fa-2x"></span>
+                        <i class="fa fa-cog fa-2x"></i>
                     </h4>
                 </a>
             </li>
@@ -73,17 +73,23 @@
 
     <div class="card">
         <ul class="text-xs-center col-lg-3 offset-lg-8 list-group" style="position:absolute;margin-top: 1%;">
-            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#newConnection"
-                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">New Connection
+            <li class="list-group-item btn btn-squared text-uppercase text-justify" data-toggle="modal"
+                data-target="#newConnection"><h5 style="color:#ffffff">New Connection <span
+                            class="fa fa-connectdevelop fa-2x pull-right" aria-hidden="true"></span>
+                </h5>
+
             </li>
-            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#newElement"
-                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">New Element
+            <li class="list-group-item btn btn-squared  text-uppercase text-justify" data-toggle="modal"
+                data-target="#newElement"><h5 style="color:#ffffff">New Element<span
+                            class="fa fa-object-ungroup fa-2x pull-right" aria-hidden="true"></span></h5>
             </li>
-            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#elementInfo"
-                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">Element Info
+            <li class="list-group-item btn btn-squared  text-uppercase text-justify" data-toggle="modal"
+                data-target="#elementInfo"><h5 style="color:#ffffff">Element Info <i class="fa fa-info fa-2x pull-right"
+                                                                                     aria-hidden="true"></i>
+                </h5>
             </li>
-            <li class="list-group-item btn btn-squared"
-                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">Other
+            <li class="list-group-item btn btn-squared  text-uppercase text-justify"><h5 style="color:#ffffff">Other<i
+                            class="fa fa-hand-peace-o fa-2x pull-right" aria-hidden="true"></i></h5>
             </li>
 
         </ul>
@@ -130,7 +136,7 @@
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-default btn-lg fa fa-plus-circle col-md-2 offset-md-2"></a>
+                            <a href="#" class="btn btn-default btn-lg fa fa-minus-circle col-md-2 offset-md-2"></a>
                         </div>
                     </li>
 
@@ -158,11 +164,11 @@
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-default btn-lg fa fa-plus-circle col-md-2 offset-md-2"></a>
+                            <a href="#" class="btn btn-default btn-lg fa fa-minus-circle col-md-2 offset-md-2"></a>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="btn btn-default btn-lg fa fa-plus-circle col-md-2 offset-md-2"></a>
+                        <a href="#" class="btn btn-default btn-lg fa fa-plus-circle "> Add New Connection</a>
                     </li>
                 </ul>
 
@@ -177,8 +183,72 @@
 <div class="modal" id="newElement" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Element information</h4>
+            </div>
+            <div class="modal-body row">
+                <div class="col-lg-5 bg-faded">
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        Category1
+                                    </a>
+                                </h4>
+                            </div>
+                            <ul id="collapseOne" class="panel-collapse collapse in list-group" role="tabpanel"
+                                aria-labelledby="headingOne">
+                                <li class="list-group-item">Element1</li>
+                                <li class="list-group-item">Element2</li>
+                                <li class="list-group-item">Element3</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div id="accordion1" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsetwo"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        Category2
+                                    </a>
+                                </h4>
+                            </div>
+                            <ul id="collapsetwo" class="panel-collapse collapse in list-group" role="tabpanel"
+                                aria-labelledby="headingOne">
+                                <li class="list-group-item">Element1</li>
+                                <li class="list-group-item">Element2</li>
+                                <li class="list-group-item">Element3</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <h4>Element1</h4>
+
+                    <p>
+                        For 50 years, WWF has been protecting the future of nature. The world's leading conservation
+                        organization, WWF works in 100 countries and is supported by 1.2 million members in the United
+                        States and close to 5 million globally.
+                    </p>
+                    <h4>During Forward Pass</h4>
+                    <p> For 50 years, WWF has been protecting the future of nature. The world's leading conservation
+                        organization, WWF works in 100 countries and is supported by 1.2 million members in the United
+                        States and close to 5 million globally.
+                    </p>
 
 
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
         </div>
     </div>
 </div>
