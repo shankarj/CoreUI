@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/stylesheets/vendor/fontawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/stylesheets/vendor/animate.css/animate.css"/>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="/javascripts/external/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/javascripts/external/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/vendor/toastr/toastr.min.css"/>
 
     <!-- App styles -->
@@ -34,7 +34,7 @@
     <nav class="navbar navbar-default" role="navigation">
 
 
-        <a href="#" class="navbar-brand">i STACK <span>1.0</span></a>
+        <a href="#" class="btn btn-outline-secondary navbar-brand">i STACK <span>1.0</span></a>
 
 
         <ul class="nav navbar-nav">
@@ -60,7 +60,9 @@
         <ul class="nav navbar-nav pull-right">
             <li class="nav-item">
                 <a href="#">
-                    <h4><span class="fa fa-cogs fa-2x"></span></h4>
+                    <h4>
+                        <span class="fa fa-cog fa-2x"></span>
+                    </h4>
                 </a>
             </li>
         </ul>
@@ -71,17 +73,17 @@
 
     <div class="card">
         <ul class="text-xs-center col-lg-3 offset-lg-8 list-group" style="position:absolute;margin-top: 1%;">
-            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#toolpanel"
+            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#newConnection"
                 style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">New Connection
             </li>
-            <li class="list-group-item btn btn-squared"
+            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#newElement"
                 style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">New Element
             </li>
-            <li class="list-group-item btn btn-squared"
+            <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#elementInfo"
                 style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">Element Info
             </li>
             <li class="list-group-item btn btn-squared"
-                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">Porta ac consectetur ac
+                style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">Other
             </li>
 
         </ul>
@@ -94,7 +96,7 @@
     <!-- End main content-->
 
 </div>
-<div class="modal" id="toolpanel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="newConnection" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -170,6 +172,44 @@
                 <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal" id="newElement" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="elementInfo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">Element Information</div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Connections</a>
+                    </li>
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home" role="tabpanel">The Overview</div>
+                    <div class="tab-pane" id="profile" role="tabpanel">The Connections</div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
     </div>
 </div>
 <!-- End wrapper-->
