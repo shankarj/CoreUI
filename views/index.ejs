@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="/stylesheets/vendor/fontawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/stylesheets/vendor/animate.css/animate.css"/>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/javascripts/external/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/vendor/toastr/toastr.min.css"/>
 
     <!-- App styles -->
@@ -35,58 +34,43 @@
     <nav class="navbar navbar-default" role="navigation">
 
 
-        <div class="navbar-header text-center">
-            <a href="#" class="navbar-brand">iSTACK <span>1.0</span></a>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-
-            <div class="container pull-left">
-                <ul class="nav nav-justified">
+        <a href="#" class="navbar-brand">i STACK <span>1.0</span></a>
 
 
-                    <li class="active">
-                        <a href="#" class="btn btn-block">
-                            <h3>Home</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-block">
-                            <h3> Datasets</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-block">
-                            <h3>Projects
-                                <span>
+        <ul class="nav navbar-nav">
 
-                                </span></h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Live <span></span></h3>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav pull-right settings">
-                    <li class="">
-                        <a href="#">
-                            <h3><span class="fa fa-cogs"></span></h3>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+            <li class="nav-item active">
+                <a href="#" class="btn btn-block">
+                    <h4>Home</h4>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-block">
+                    <h4> Datasets</h4>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-block">
+                    <h4>Projects</h4>
+                </a>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+            <li class="nav-item">
+                <a href="#">
+                    <h4><span class="fa fa-cogs fa-2x"></span></h4>
+                </a>
+            </li>
+        </ul>
+
 
     </nav>
 
 
-    <div class="panel panel-success" style="position:absolute; right:5px; width:20%;height:auto; zoom: 2;">
-        <!-- List group -->
-        <ul class="list-group">
+    <div class="card" >
+        <ul class="text-xs-center col-lg-3 offset-lg-8 list-group" style="position:absolute;margin-top: 1%;">
             <li class="list-group-item btn btn-squared" data-toggle="modal" data-target="#toolpanel"
                 style="margin-bottom:1px;color:#ffffff;background-color: #1bbf89;">New Connection
             </li>
@@ -102,6 +86,8 @@
 
         </ul>
     </div>
+
+
     <canvas id="networkCanvas" style="width:100%;height:100%;background-color: #ffffff"></canvas>
 
 
@@ -114,9 +100,26 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">New Connection</h4>
 
-                <img src="images/Elements.png" width="100%" height="20%">
+                <img src="images/Elements.png" width="100%" height="18%">
             </div>
             <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item" style="zoom: 1;">
+                        <div class="dropdown open">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+                        <span class="pull-right fa fa-plus-circle"></span></li>
+                    <li class="list-group-item"></li>
+                </ul>
 
             </div>
             <div class="modal-footer">
@@ -136,9 +139,7 @@
 <script src="/stylesheets/vendor/pacejs/pace.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+<script src="/javascripts/external/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
 <script src="/stylesheets/vendor/sparkline/index.js"></script>
