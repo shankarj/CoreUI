@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
-
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     <!-- Page title -->
     <title>ISTACK | Responsive Admin Theme</title>
 
@@ -27,6 +27,7 @@
     <% include ./common/scripts %>
 
 </head>
+
 <body>
 <div class="wrapper">
 
@@ -34,7 +35,7 @@
     <nav class="navbar navbar-default" role="navigation">
 
 
-        <a href="#" class="btn btn-outline-secondary navbar-brand disabled">i STACK <span>1.0</span></a>
+        <a href="#" class="btn navbar-brand">iSTACK <span>1.0</span></a>
 
 
         <ul class="nav navbar-nav">
@@ -61,7 +62,7 @@
             <li class="nav-item">
                 <a href="#">
                     <h4>
-                        <i class="fa fa-cog fa-2x"></i>
+                        <!--<i class="fa fa-cog fa-x"></i>-->
                     </h4>
                 </a>
             </li>
@@ -70,29 +71,19 @@
 
     </nav>
 
+    <div class="toolbar container pull-right" style="margin:10px">
+        <button type="button" style="margin: 5px" class="btn tooltip-feature btn-default btn-circle btn-lg"
+                data-toggle="modal"
 
-    <div class="card">
-        <ul class="text-xs-center col-lg-3 offset-lg-8 list-group" style="position:absolute;margin-top: 1%;">
-            <li class="list-group-item btn btn-squared text-uppercase text-justify" data-toggle="modal"
-                data-target="#newConnection"><h5 style="color:#ffffff">New Connection <span
-                            class="fa fa-connectdevelop fa-2x pull-right" aria-hidden="true"></span>
-                </h5>
-
-            </li>
-            <li class="list-group-item btn btn-squared  text-uppercase text-justify" data-toggle="modal"
-                data-target="#newElement"><h5 style="color:#ffffff">New Element<span
-                            class="fa fa-object-ungroup fa-2x pull-right" aria-hidden="true"></span></h5>
-            </li>
-            <li class="list-group-item btn btn-squared  text-uppercase text-justify" data-toggle="modal"
-                data-target="#elementInfo"><h5 style="color:#ffffff">Element Info <i class="fa fa-info fa-2x pull-right"
-                                                                                     aria-hidden="true"></i>
-                </h5>
-            </li>
-            <li class="list-group-item btn btn-squared  text-uppercase text-justify"><h5 style="color:#ffffff">Other<i
-                            class="fa fa-hand-peace-o fa-2x pull-right" aria-hidden="true"></i></h5>
-            </li>
-
-        </ul>
+                data-target="#newElement" data-placement="bottom" title="Tooltip on top">
+            <i
+                    class="fa fa-plus fa-1x text-muted"></i></button>
+        <button type="button" style="margin: 5px" class="btn tooltip-feature btn-default btn-circle btn-lg"
+                data-toggle="modal"  data-placement="bottom"  title="Element info"
+                data-target="#elementInfo"><i class="fa fa-info fa-1x text-muted"
+                                             ></i></button>
+        <button type="button" style="margin: 5px" class="btn btn-default btn-circle btn-lg" data-toggle="modal"
+                data-target="#other"><i class="fa fa-hand-peace-o fa-1x text-muted"></i></button>
     </div>
 
 
@@ -200,8 +191,8 @@
                             </div>
                             <ul id="collapseOne" class="panel-collapse collapse in list-group" role="tabpanel"
                                 aria-labelledby="headingOne">
-                                <li class="list-group-item">Element1</li>
-                                <li class="list-group-item">Element2</li>
+                                <li class="list-group-item">Square</li>
+                                <li class="list-group-item">Circle</li>
                                 <li class="list-group-item">Element3</li>
                             </ul>
                         </div>
@@ -219,8 +210,8 @@
                             </div>
                             <ul id="collapsetwo" class="panel-collapse collapse in list-group" role="tabpanel"
                                 aria-labelledby="headingOne">
-                                <li class="list-group-item">Element1</li>
-                                <li class="list-group-item">Element2</li>
+                                <li class="list-group-item">Square</li>
+                                <li class="list-group-item">Circle</li>
                                 <li class="list-group-item">Element3</li>
                             </ul>
                         </div>
@@ -292,11 +283,16 @@
 <script src="/stylesheets/vendor/pacejs/pace.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
+<script src="/javascripts/external/bootstrap/dist/js/teather.min.js"></script>
 <script src="/javascripts/external/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
 <script src="/stylesheets/vendor/sparkline/index.js"></script>
-
+<script>
+    $(function () {
+        $('.tooltip-feature').tooltip()
+    })
+</script>
 
 </body>
 

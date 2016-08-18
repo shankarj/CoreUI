@@ -251,7 +251,12 @@ function moveGroupWithConns(groupName, newPosition) {
         renderConnection(startPoint, endPoint, true, connObject, null, null);
     }
 }
+function fireModal() {
 
+    $('#newConnection').modal('show');
+
+
+}
 function drawElement(elementType, elementId, color, imageUrl) {
     var pathElements = null;
     if (elementType === "circle") {
@@ -271,7 +276,9 @@ function drawElement(elementType, elementId, color, imageUrl) {
         }
     };
     pathElements[2].onMouseDown = function (event) {
+
         if (!doConnect) {
+
             doConnect = true;
             startPoint = this.position;
             endPoint = event.point;
@@ -280,6 +287,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
         }
     };
     pathElements[1].onMouseUp = function (event) {
+        fireModal();
         if (doConnect) {
             doConnect = false;
             connectionsCount += 1;
@@ -289,6 +297,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
         }
     };
     pathElements[2].onMouseUp = function (event) {
+        fireModal();
         if (doConnect) {
             doConnect = false;
             connectionsCount += 1;
