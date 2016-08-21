@@ -32,10 +32,11 @@
 <div class="wrapper">
 
     <!-- Header-->
-    <nav class="navbar navbar-default" role="navigation">
+
+    <nav class="navbar navbar-dark" role="navigation">
 
 
-        <a href="#" class="btn navbar-brand">iSTACK <span>1.0</span></a>
+        <a href="#" class="navbar-brand"><span class="word2"> i</span><span class="word1">stack </span> </a>
 
 
         <ul class="nav navbar-nav">
@@ -71,18 +72,18 @@
 
     </nav>
 
-    <div class="toolbar container pull-right" style="margin:10px">
-        <button type="button" style="margin: 5px" class="btn tooltip-feature btn-default btn-circle btn-lg"
+    <div class="toolbar container pull-right">
+        <button type="button" class="btn tooltip-feature btn-default btn-circle btn-lg"
                 data-toggle="modal"
 
-                data-target="#newElement" data-placement="bottom" title="Tooltip on top">
+                data-target="#newElement" data-placement="bottom" title="Create New Element">
             <i
                     class="fa fa-plus fa-1x text-muted"></i></button>
-        <button type="button" style="margin: 5px" class="btn tooltip-feature btn-default btn-circle btn-lg"
-                data-toggle="modal"  data-placement="bottom"  title="Element info"
+        <button type="button" class="btn tooltip-feature btn-default btn-circle btn-lg"
+                data-toggle="modal" data-placement="bottom" title="Element info"
                 data-target="#elementInfo"><i class="fa fa-info fa-1x text-muted"
-                                             ></i></button>
-        <button type="button" style="margin: 5px" class="btn btn-default btn-circle btn-lg" data-toggle="modal"
+            ></i></button>
+        <button type="button" class="btn btn-default btn-circle btn-lg" data-toggle="modal"
                 data-target="#other"><i class="fa fa-hand-peace-o fa-1x text-muted"></i></button>
     </div>
 
@@ -282,12 +283,15 @@
 <!-- Vendor scripts -->
 <script src="/stylesheets/vendor/pacejs/pace.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="/javascripts/external/bootstrap/dist/js/teather.min.js"></script>
+
+<!-- Latest compiled and minified Bootstrap & Tether JavaScript -->
+<script src="/javascripts/external/bootstrap/dist/js/tether.min.js"></script>
 <script src="/javascripts/external/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
 <script src="/stylesheets/vendor/sparkline/index.js"></script>
+
+<!-- Initailizing Script - Can be externalized later -->
 <script>
     $(function () {
         $('.tooltip-feature').tooltip()
