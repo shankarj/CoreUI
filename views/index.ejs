@@ -22,6 +22,8 @@
 
     <link rel="stylesheet" href="/stylesheets/style.css">
 
+    <!--Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <!--Paper js-->
     <% include ./common/scripts %>
@@ -88,7 +90,7 @@
     </div>
 
 
-    <canvas id="networkCanvas" style="width:100%;height:100%;background-color: #ffffff"></canvas>
+    <canvas id="networkCanvas"></canvas>
 
 
     <!-- End main content-->
@@ -172,52 +174,39 @@
         </div>
     </div>
 </div>
-<div class="modal" id="newElement" tabindex="-1" role="dialog">
+<div class="modal fade" id="newElement" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Element information</h4>
+                <h4 class="modal-title text-justify">Create New Element</h4>
             </div>
             <div class="modal-body row">
-                <div class="col-lg-5 bg-faded">
-                    <div id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                       aria-expanded="true" aria-controls="collapseOne">
-                                        Category1
-                                    </a>
-                                </h4>
-                            </div>
-                            <ul id="collapseOne" class="panel-collapse collapse in list-group" role="tabpanel"
-                                aria-labelledby="headingOne">
-                                <li class="list-group-item">Square</li>
-                                <li class="list-group-item">Circle</li>
-                                <li class="list-group-item">Element3</li>
-                            </ul>
-                        </div>
+                <div class="col-lg-5">
+                    <ul class="nav nav-list container">
+                        <li>
+                            <label class="tree-toggler nav-header card text-md-center h4 bg-info">Category 1</label>
+                            <ul class="nav nav-list tree">
+                                <li class="card h5 offset-lg-2">Square</li>
+                                <li class="card h5 offset-lg-2">Circle
+                                </li>
 
-                    </div>
-                    <div id="accordion1" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsetwo"
-                                       aria-expanded="true" aria-controls="collapseOne">
-                                        Category2
-                                    </a>
-                                </h4>
-                            </div>
-                            <ul id="collapsetwo" class="panel-collapse collapse in list-group" role="tabpanel"
-                                aria-labelledby="headingOne">
-                                <li class="list-group-item">Square</li>
-                                <li class="list-group-item">Circle</li>
-                                <li class="list-group-item">Element3</li>
                             </ul>
-                        </div>
 
-                    </div>
+                        </li>
+                        <li>
+                            <label class="tree-toggler nav-header card text-md-center h4 bg-info">Category 2</label>
+                            <ul class="nav nav-list tree">
+                                <li class="card h5 offset-lg-2">Square</li>
+                                <li class="card h5 offset-lg-2">Circle
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+
+                    </ul>
+
                 </div>
                 <div class="col-lg-7">
                     <h4>Element1</h4>
@@ -244,10 +233,10 @@
         </div>
     </div>
 </div>
-<div class="modal" id="elementInfo" tabindex="-1" role="dialog">
+<div class="modal fade" id="elementInfo" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">Element Information</div>
+            <div class="modal-header"><h4 class="modal-title text-justify">Element information</h4></div>
             <div class="modal-body">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
@@ -295,7 +284,20 @@
 <script>
     $(function () {
         $('.tooltip-feature').tooltip()
+
+        $('.nav-item').click(function () {
+            $('.nav-item').removeClass('active');
+            $(this).addClass('active')
+
+
+        })
+        $('label.tree-toggler').click(function () {
+
+            $(this).parent().children('ul.tree').toggle(300);
+        });
+
     })
+
 </script>
 
 </body>

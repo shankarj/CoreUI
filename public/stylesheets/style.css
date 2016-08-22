@@ -1,3 +1,8 @@
+canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff
+}
 
 .nav-item.active::after {
     content: "";
@@ -5,11 +10,11 @@
     height: 0px;
     position: absolute;
     bottom: 0px;
-    margin-left: 25px;
+    margin-left: 40px;
     top: 30px;
-    border-width: 25px;
+    border-width: 20px;
     border-style: outset outset solid;
-    border-color: transparent transparent #f0f0f0;
+    border-color: transparent transparent #E0E0E0;
 
 }
 
@@ -134,4 +139,33 @@ nav {
 .toolbar > * {
     margin: 5px;
     border: 0.5px solid #4a4a4a;
+}
+
+.category-title {
+    top: 10%;
+    margin: 10px;
+
+}
+
+.category-title:hover {
+
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.tree-toggler {
+
+}
+
+.tree > li.card {
+
+    padding-left: 1%;
+}
+
+.modal-header {
+    background-color: #424242
+}
+
+.modal-title {
+    color: #E0E0E0
 }
