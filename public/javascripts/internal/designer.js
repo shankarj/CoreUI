@@ -327,7 +327,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
     group.onDoubleClick = function (event) {
 
 
-        $('#elementInfo').modal('show').on;
+        $('#elementInfo').modal('show');
         $('#elementInfo').on('shown.bs.modal', function (event) {
             console.log(group.name)
             var button = $(event.relatedTarget) // Button that triggered the modal
@@ -341,6 +341,22 @@ function drawElement(elementType, elementId, color, imageUrl) {
 
 
     };
+
+
+
+    function placeDiv(x_pos, y_pos, content) {
+        var d = document.getElementById('sample');
+        d.style.position = "absolute";
+        d.style.left = x_pos + 'px';
+        d.style.top = y_pos + 'px';
+        d.innerHTML = content;
+    }
+
+    group.onClick = function (event) {
+        var content = group.name;
+        placeDiv(event.point.x, event.point.y+20, content)
+
+    }
     group.onMouseDrag = function (event) {
         console.log("mouse drag")
         if (!doConnect) {
@@ -379,8 +395,10 @@ $(document).ready(function () {
         drawElement("circle", "element001", '#616161', null);
 
     })
-    drawElement("circle", "element002", '#6D4C41', null);
-    drawElement("circle", "element003", '#2E7D32', null);
+
+
+    drawElement("circle", "element002", 'tomato', null);
+    drawElement("circle", "element003", 'powderblue', null);
 
 
 });
