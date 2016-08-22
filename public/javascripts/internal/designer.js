@@ -14,8 +14,9 @@ var connectionsCount = 0;
 
 // Canvas Object event inits.
 var canvasObject = document.getElementById("networkCanvas");
-canvasObject.addEventListener("mousewheel", zoomCanvasHandler, false); // For IE, Chrome
+// canvasObject.addEventListener("mousewheel", zoomCanvasHandler, false); // For IE, Chrome
 canvasObject.addEventListener("DOMMouseScroll", zoomCanvasHandler, false); // For Firefox
+
 
 // Network structure
 var networkElements = {};
@@ -257,6 +258,7 @@ function fireModal() {
 
 
 }
+
 function drawElement(elementType, elementId, color, imageUrl) {
     var pathElements = null;
     if (elementType === "circle") {
@@ -322,7 +324,25 @@ function drawElement(elementType, elementId, color, imageUrl) {
 
     var group = new Group([pathElements[0], pathElements[1], pathElements[2]]);
     group.name = elementId;
+    group.onDoubleClick = function (event) {
+
+
+        $('#elementInfo').modal('show').on;
+        $('#elementInfo').on('shown.bs.modal', function (event) {
+            console.log(group.name)
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = group.name;  // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Element Information - ' + recipient)
+
+        })
+
+
+    };
     group.onMouseDrag = function (event) {
+        console.log("mouse drag")
         if (!doConnect) {
             group.position += event.delta;
             moveGroupWithConns(this.name, group.position);
@@ -331,11 +351,13 @@ function drawElement(elementType, elementId, color, imageUrl) {
         }
     };
     group.onMouseEnter = function (event) {
+        console.log("mouse enter")
         if (doConnect) {
             this.dashArray = [4, 4];
         }
     };
     group.onMouseLeave = function (event) {
+        console.log("mouse leave")
         this.dashArray = [0, 0];
     };
 
@@ -352,7 +374,13 @@ function drawElement(elementType, elementId, color, imageUrl) {
  */
 $(document).ready(function () {
     // drawGridLines();
-    drawElement("circle", "e001", '#FFB74D', null);
-    drawElement("circle", "e002", '#A1887F', null);
-    drawElement("rect", "e003", '#90A4AE', null);
+
+    $('.add-element-submit').click(function () {
+        drawElement("circle", "element001", '#616161', null);
+
+    })
+    drawElement("circle", "element002", '#6D4C41', null);
+    drawElement("circle", "element003", '#2E7D32', null);
+
+
 });
