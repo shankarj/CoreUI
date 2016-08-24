@@ -1,2 +1,4 @@
-# CoreUI
-NodeJS UI for the main service.
+# iStack
+Express framework based Application for Machine Learning
+
+#### &copy; 2016
