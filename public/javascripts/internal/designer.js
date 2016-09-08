@@ -39,6 +39,9 @@ function onMouseDown(event) {
         selectedConnectionObj.strokeColor = selectedConnRevertColor;
         selectedConnectionObj.strokeWidth = selectedConnRevertThickness;
     }
+
+
+
 }
 
 function onMouseMove(event) {
@@ -106,20 +109,24 @@ function zoomCanvasHandler(e) {
  * Drawing grid lines.
  */
 function drawGridLines() {
-    for (var i = 0; i <= viewHeight; i = i + gridSize) {
-        var horLine = new Path();
-        horLine.strokeColor = '#F0F0F0';
-        horLine.opacity = 0.1;
-        horLine.add(new Point(0, i), new Point(viewWidth, i));
+  for (var i = 0; i <= viewHeight; i = i + 35) {
+       var horLine = new Path();
+       horLine.strokeColor = 'gray';
+       horLine.opacity = 1;
+       horLine.add(new Point(0, i), new Point(viewWidth, i));
+       horLine.dashArray = [0.2, 10];
+   }
 
-    }
+   for (var i = 0; i <= viewWidth; i = i + 35) {
+       var verLine = new Path();
+       verLine.strokeColor = 'gray';
+       verLine.opacity = 1;
+       verLine.add(new Point(i, 0), new Point(i, viewHeight));
+       verLine.dashArray = [0.2,10];
+   }
 
-    for (var i = 0; i <= viewWidth; i = i + gridSize) {
-        var verLine = new Path();
-        verLine.strokeColor = 'gray';
-        verLine.opacity = 0.1;
-        verLine.add(new Point(i, 0), new Point(i, viewHeight));
-    }
+
+
 }
 
 
@@ -268,6 +275,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
         pathElements = drawRoundedRectElement(paper, color, elementId);
     }
 
+
     pathElements[1].onMouseDown = function (event) {
         if (!doConnect) {
             doConnect = true;
@@ -389,16 +397,16 @@ function drawElement(elementType, elementId, color, imageUrl) {
  * Flow starts here
  */
 $(document).ready(function () {
-    // drawGridLines();
+    drawGridLines();
 
     $('.add-element-submit').click(function () {
-        drawElement("circle", "element001", '#616161', null);
+        drawElement("rect", "element001", '#616161', null);
 
     })
 
 
-    drawElement("circle", "element002", 'tomato', null);
-    drawElement("circle", "element003", 'powderblue', null);
+    drawElement("rect", "element002", '#E0E0E0', null);
+    drawElement("rect", "element003", '#E0E0E0', null);
 
 
 });
