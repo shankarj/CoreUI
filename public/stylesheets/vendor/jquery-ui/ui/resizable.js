@@ -74,7 +74,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			return true;
 		}
 
-		// TODO: determine which cases actually cause this to happen
+		// TODO:310 determine which cases actually cause this to happen
 		// if the element doesn't have the scroll set, see if it's possible to
 		// set the scroll
 		el[ scroll ] = 1;
@@ -177,7 +177,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 				axis.css({ zIndex: o.zIndex });
 
-				// TODO : What's going on here?
+				// #TODO:10 : What's going on here?
 				if ("se" === handle) {
 					axis.addClass("ui-icon ui-icon-gripsmall-diagonal-se");
 				}
@@ -217,14 +217,14 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 				}
 
-				// TODO: What's that good for? There's not anything to be executed left
+				// TODO:280 What's that good for? There's not anything to be executed left
 				if (!$(this.handles[i]).length) {
 					continue;
 				}
 			}
 		};
 
-		// TODO: make renderAxis a prototype function
+		// TODO:390 make renderAxis a prototype function
 		this._renderAxis(this.element);
 
 		this._handles = $(".ui-resizable-handle", this.element)
@@ -280,7 +280,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 						.remove();
 			};
 
-		// TODO: Unwrap at same DOM position
+		// TODO:240 Unwrap at same DOM position
 		if (this.elementIsWrapper) {
 			_destroy(this.element);
 			wrapper = this.element;
@@ -655,7 +655,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 			prel = this._proportionallyResizeElements[i];
 
-			// TODO: Seems like a bug to cache this.outerDimensions
+			// TODO:200 Seems like a bug to cache this.outerDimensions
 			// considering that we are in a loop.
 			if (!this.outerDimensions) {
 				this.outerDimensions = this._getPaddingPlusBorderDimensions( prel );
@@ -685,7 +685,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 				position: "absolute",
 				left: this.elementOffset.left + "px",
 				top: this.elementOffset.top + "px",
-				zIndex: ++o.zIndex //TODO: Don't modify option
+				zIndex: ++o.zIndex //TODO:60 Don't modify option
 			});
 
 			this.helper

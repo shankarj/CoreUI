@@ -422,7 +422,7 @@ $.widget = function( name, base, prototype ) {
 		})();
 	});
 	constructor.prototype = $.widget.extend( basePrototype, {
-		// TODO: remove support for widgetEventPrefix
+		// TODO:470 remove support for widgetEventPrefix
 		// always use the name + a colon as the prefix, e.g., draggable:start
 		// don't prefix for widgets that aren't DOM-based
 		widgetEventPrefix: existingConstructor ? (basePrototype.widgetEventPrefix || name) : name
@@ -897,7 +897,7 @@ var mouse = $.widget("ui.mouse", {
 		this.started = false;
 	},
 
-	// TODO: make sure destroying one instance of mouse doesn't mess with
+	// TODO:400 make sure destroying one instance of mouse doesn't mess with
 	// other instances of mouse
 	_mouseDestroy: function() {
 		this.element.unbind("." + this.widgetName);
@@ -2723,7 +2723,7 @@ var menu = $.widget( "ui.menu", {
 	},
 
 	select: function( event ) {
-		// TODO: It should never be possible to not have an active item at this
+		// TODO:90 It should never be possible to not have an active item at this
 		// point, but the tests don't trigger mouseenter before click.
 		this.active = this.active || $( event.target ).closest( ".ui-menu-item" );
 		var ui = { item: this.active };
@@ -3329,7 +3329,7 @@ $.extend( $.ui.autocomplete, {
 });
 
 // live region extension, adding a `messages` option
-// NOTE: This is an experimental API. We are still investigating
+// NOTE:20 This is an experimental API. We are still investigating
 // a full solution for string manipulation and internationalization.
 $.widget( "ui.autocomplete", $.ui.autocomplete, {
 	options: {
@@ -3536,7 +3536,7 @@ $.widget( "ui.button", {
 			if ( this.buttonElement.is("a") ) {
 				this.buttonElement.keyup(function(event) {
 					if ( event.keyCode === $.ui.keyCode.SPACE ) {
-						// TODO pass through original event correctly (just as 2nd argument doesn't work)
+						// TODO:420 pass through original event correctly (just as 2nd argument doesn't work)
 						$( this ).click();
 					}
 				});
@@ -3898,7 +3898,7 @@ $.extend(Datepicker.prototype, {
 	//Keep track of the maximum number of rows displayed (see #7043)
 	maxRows: 4,
 
-	// TODO rename to "widget" when switching to widget factory
+	// TODO:490 rename to "widget" when switching to widget factory
 	_widgetDatepicker: function() {
 		return this.dpDiv;
 	},
@@ -6999,7 +6999,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			return true;
 		}
 
-		// TODO: determine which cases actually cause this to happen
+		// TODO:300 determine which cases actually cause this to happen
 		// if the element doesn't have the scroll set, see if it's possible to
 		// set the scroll
 		el[ scroll ] = 1;
@@ -7102,7 +7102,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 				axis.css({ zIndex: o.zIndex });
 
-				// TODO : What's going on here?
+				// TODO:0 : What's going on here?
 				if ("se" === handle) {
 					axis.addClass("ui-icon ui-icon-gripsmall-diagonal-se");
 				}
@@ -7142,14 +7142,14 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 				}
 
-				// TODO: What's that good for? There's not anything to be executed left
+				// TODO:270 What's that good for? There's not anything to be executed left
 				if (!$(this.handles[i]).length) {
 					continue;
 				}
 			}
 		};
 
-		// TODO: make renderAxis a prototype function
+		// TODO:380 make renderAxis a prototype function
 		this._renderAxis(this.element);
 
 		this._handles = $(".ui-resizable-handle", this.element)
@@ -7205,7 +7205,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 						.remove();
 			};
 
-		// TODO: Unwrap at same DOM position
+		// TODO:230 Unwrap at same DOM position
 		if (this.elementIsWrapper) {
 			_destroy(this.element);
 			wrapper = this.element;
@@ -7580,7 +7580,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 			prel = this._proportionallyResizeElements[i];
 
-			// TODO: Seems like a bug to cache this.outerDimensions
+			// TODO:190 Seems like a bug to cache this.outerDimensions
 			// considering that we are in a loop.
 			if (!this.outerDimensions) {
 				this.outerDimensions = this._getPaddingPlusBorderDimensions( prel );
@@ -7610,7 +7610,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 				position: "absolute",
 				left: this.elementOffset.left + "px",
 				top: this.elementOffset.top + "px",
-				zIndex: ++o.zIndex //TODO: Don't modify option
+				zIndex: ++o.zIndex //TODO:50 Don't modify option
 			});
 
 			this.helper
@@ -8889,7 +8889,7 @@ var dialog = $.widget( "ui.dialog", {
 			return true;
 		}
 
-		// TODO: Remove hack when datepicker implements
+		// TODO:170 Remove hack when datepicker implements
 		// the .ui-front logic (#8989)
 		return !!$( event.target ).closest( ".ui-datepicker" ).length;
 	},
@@ -13688,7 +13688,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		});
 
 		// Only after we got the offset, we can change the helper's position to absolute
-		// TODO: Still need to figure out a way to make relative sorting possible
+		// TODO:210 Still need to figure out a way to make relative sorting possible
 		this.helper.css("position", "absolute");
 		this.cssPosition = this.helper.css("position");
 
@@ -14290,7 +14290,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		//Append it after the actual current item
 		that.currentItem.after(that.placeholder);
 
-		//Update the size of the placeholder (TODO: Logic to fuzzy, see line 316/317)
+		//Update the size of the placeholder (TODO:110 Logic to fuzzy, see line 316/317)
 		o.placeholder.update(that, that.placeholder);
 
 	},
@@ -14949,7 +14949,7 @@ var spinner = $.widget( "ui.spinner", {
 			}
 			this._repeat( null, $( event.currentTarget ).hasClass( "ui-spinner-up" ) ? 1 : -1, event );
 		},
-		// TODO: do we really want to consider this a stop?
+		// TODO:330 do we really want to consider this a stop?
 		// shouldn't we just stop the repeater and wait until mouseup before
 		// we trigger the stop event?
 		"mouseleave .ui-spinner-button": "_stop"
@@ -15180,7 +15180,7 @@ var spinner = $.widget( "ui.spinner", {
 		this.element.attr({
 			"aria-valuemin": this.options.min,
 			"aria-valuemax": this.options.max,
-			// TODO: what should we do with values that can't be parsed?
+			// TODO:510 what should we do with values that can't be parsed?
 			"aria-valuenow": this._parse( this.element.val() )
 		});
 	},

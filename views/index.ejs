@@ -1,5 +1,5 @@
-<html>
-<head>
+    <html>
+    <head>
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
@@ -7,7 +7,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     <!-- Page title -->
-    <title>ISTACK | ML</title>
+    <title>Dexel | ML</title>
+
 
     <!-- Vendor styles -->
     <link rel="stylesheet" href="/stylesheets/vendor/fontawesome/css/font-awesome.css"/>
@@ -31,17 +32,17 @@
     <!--Paper js-->
     <% include ./common/scripts %>
 
-</head>
+    </head>
 
-<body>
-<div class="wrapper">
+    <body>
+    <div class="wrapper">
 
     <!-- Header-->
 
     <nav class="navbar navbar-dark" role="navigation">
 
 
-        <a href="#" class="navbar-brand"><span class="word2"> i</span><span class="word1">stack </span> </a>
+        <a href="#" class="navbar-brand"><span class="word2">dexe</span><span class="word1"> l</span> </a>
 
 
         <ul class="nav navbar-nav">
@@ -100,22 +101,23 @@
     </div>
     <span class="tag tag-default tag-pill pull-xs-right" id="sample"></span>
     <div class="deploy container" style="position: absolute; right: 0;bottom:0; margin: 1%;">
-        <button type="button" class="btn btn-outline-danger btn-block btn-lg" data-toggle="modal"
+        <button type="button" class="btn btn-outline-mute text-muted btn-block btn-lg" data-toggle="modal"
 
                 data-target="#other">Deploy <i class="fa  fa-paper-plane  fa-1x"></i></button>
 
     </div>
 
-
-    <canvas id="networkCanvas"></canvas>
-
-
+    <!-- iStack:0 : Different categories and functions = Shapes & Tags -->
+    <!-- iStack:1 : Canvas scrolling like node red project -->
+    <div class="canvasDiv">
+        <canvas id="networkCanvas"></canvas>
+      </div>
     <!-- End main content-->
 
-</div>
+    </div>
 
-<!-- New Connection Modal-->
-<div class="modal fade" id="newConnection" tabindex="-1" role="dialog">
+    <!-- New Connection Modal-->
+    <div class="modal fade" id="newConnection" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -192,11 +194,11 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 
-<!-- New Element Modal -->
-<div class="modal fade" id="newElement" tabindex="-1" role="dialog">
+    <!-- New Element Modal -->
+    <div class="modal fade" id="newElement" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -254,11 +256,11 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 
-<!-- Element Information Modal-->
-<div class="modal fade" id="elementInfo" tabindex="-1" role="dialog">
+    <!-- Element Information Modal-->
+    <div class="modal fade" id="elementInfo" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header"><h4 class="modal-title text-justify">Element information</h4></div>
@@ -302,19 +304,19 @@
         </div>
 
     </div>
-</div>
+    </div>
 
 
-<!-- End wrapper-->
-<!--Paper scripts-->
+    <!-- End wrapper-->
+    <!--Paper scripts-->
 
-<script type="text/javascript" src="/javascripts/internal/settings.js"></script>
-<script type="text/javascript" src="/javascripts/internal/canvasEvents.js"></script>
-<script type="text/paperscript" src="/javascripts/internal/designer.js" canvas="networkCanvas"></script>
+    <script type="text/javascript" src="/javascripts/internal/settings.js"></script>
+    <script type="text/javascript" src="/javascripts/internal/canvasEvents.js"></script>
+    <script type="text/paperscript" src="/javascripts/internal/designer.js" canvas="networkCanvas"></script>
 
-<!--Intro JS -->
-<script type="text/javascript" src="/javascripts/external/introJS/intro.js"></script>
-<script>
+    <!--Intro JS -->
+    <script type="text/javascript" src="/javascripts/external/introJS/intro.js"></script>
+    <script>
 
 
     $('.intro').click(function () {
@@ -346,19 +348,19 @@
 
     });
 
-</script>
-<!-- Vendor scripts -->
-<script src="/stylesheets/vendor/pacejs/pace.min.js"></script>
+    </script>
+    <!-- Vendor scripts -->
+    <script src="/stylesheets/vendor/pacejs/pace.min.js"></script>
 
-<!-- Latest compiled and minified Bootstrap & Tether JavaScript -->
-<script src="/javascripts/external/bootstrap/dist/js/tether.min.js"></script>
-<script src="/javascripts/external/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Latest compiled and minified Bootstrap & Tether JavaScript -->
+    <script src="/javascripts/external/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/javascripts/external/bootstrap/dist/js/bootstrap.js"></script>
 
-<script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
-<script src="/stylesheets/vendor/sparkline/index.js"></script>
+    <script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
+    <script src="/stylesheets/vendor/sparkline/index.js"></script>
 
-<!-- Initailizing Script - Can be externalized later -->
-<script>
+    <!-- Initailizing Script - Can be externalized later -->
+    <script>
     $(function () {
         $('.tooltip-feature').tooltip()
 
@@ -376,8 +378,8 @@
 
     })
 
-</script>
+    </script>
 
-</body>
+    </body>
 
-</html>
+    </html>

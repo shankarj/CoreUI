@@ -40,7 +40,7 @@ function drawCircleElement(paperObject, color, groupId) {
 
 function drawRoundedRectElement(paperObject, color, groupId) {
 
-    var rectangle = new paperObject.Rectangle(paperObject.view.center, new paperObject.Point(paperObject.view.center.x + 200, paperObject.view.center.y + 60));
+    var rectangle = new paperObject.Rectangle(paperObject.view.center, new paperObject.Point(paperObject.view.center.x + 180, paperObject.view.center.y + 50));
     var cornerSize = new paperObject.Size(10, 10);
     var mainRect = new paperObject.Path.RoundRectangle(rectangle, cornerSize);
 
@@ -76,16 +76,27 @@ function drawRoundedRectElement(paperObject, color, groupId) {
         strokeWidth: connectorCircleStrokeWidth
 
     });
+    var connectorPointTop= new paperObject.Point(mainRect.position.x , mainRect.position.y - (mainRect.bounds.height / 2));
+
+    var connectorTop = new paperObject.Path.Circle({
+        name: "top-" + groupId,
+        center: connectorPointTop,
+        radius: connectorCircleRadius,
+        fillColor: connectorPropertyCircleColor,
+        strokeColor: connectorPropertyCircleStrokeColor,
+        strokeWidth: connectorCircleStrokeWidth
+    });
+
 
     connectorLeft.bringToFront();
     connectorRight.bringToFront();
-    return [mainRect, connectorLeft, connectorRight];
+    return [mainRect, connectorLeft, connectorRight, connectorTop];
 }
 
-function drawProperty(paperObject, color, groupId) {
+function drawPropertyElement(paperObject, color, groupId) {
 
-    var rectangle = new paperObject.Rectangle(paperObject.view.center, new paperObject.Point(paperObject.view.center.x + 200, paperObject.view.center.y + 60));
-    var cornerSize = new paperObject.Size(10, 10);
+    var rectangle = new paperObject.Rectangle(paperObject.view.center, new paperObject.Point(paperObject.view.center.x + 50, paperObject.view.center.y + 50));
+    var cornerSize = new paperObject.Size(5, 5);
     var mainRect = new paperObject.Path.RoundRectangle(rectangle, cornerSize);
 
     mainRect.name = "core-" + groupId;
@@ -99,29 +110,21 @@ function drawProperty(paperObject, color, groupId) {
     }
     mainRect.bringToFront();
 
-    var connectorPointRight = new paperObject.Point(mainRect.position.x + (mainRect.bounds.width / 2), mainRect.position.y);
-    var connectorPointLeft = new paperObject.Point(mainRect.position.x - (mainRect.bounds.width / 2), mainRect.position.y);
 
-    var connectorLeft = new paperObject.Path.Circle({
-        name: "left-" + groupId,
-        center: connectorPointLeft,
+    var connectorPointBottom= new paperObject.Point(mainRect.position.x , mainRect.position.y + (mainRect.bounds.height / 2));
+
+    var connectorBottom = new paperObject.Path.Circle({
+        name: "bottom-" + groupId,
+        center: connectorPointBottom,
         radius: connectorCircleRadius,
-        fillColor: connectorCircleColor,
-        strokeColor: connectorCircleStrokeColor,
+        fillColor: connectorPropertyCircleColor,
+        strokeColor: connectorPropertyCircleStrokeColor,
         strokeWidth: connectorCircleStrokeWidth
     });
 
-    var connectorRight = new paperObject.Path.Circle({
-        name: "right-" + groupId,
-        center: connectorPointRight,
-        radius: connectorCircleRadius,
-        fillColor: connectorCircleColor,
-        strokeColor: connectorCircleStrokeColor,
-        strokeWidth: connectorCircleStrokeWidth
 
-    });
 
-    return [mainRect, connectorLeft, connectorRight];
+    return [mainRect, connectorBottom];
 }
 
 function getGroupOfElement(groupList, elementId) {

@@ -41,7 +41,6 @@ function onMouseDown(event) {
     }
 
 
-
 }
 
 function onMouseMove(event) {
@@ -109,22 +108,21 @@ function zoomCanvasHandler(e) {
  * Drawing grid lines.
  */
 function drawGridLines() {
-  for (var i = 0; i <= viewHeight; i = i + 35) {
-       var horLine = new Path();
-       horLine.strokeColor = 'gray';
-       horLine.opacity = 1;
-       horLine.add(new Point(0, i), new Point(viewWidth, i));
-       horLine.dashArray = [0.2, 10];
-   }
+    for (var i = 0; i <= viewHeight; i = i + 35) {
+        var horLine = new Path();
+        horLine.strokeColor = 'gray';
+        horLine.opacity = 1;
+        horLine.add(new Point(0, i), new Point(viewWidth, i));
+        horLine.dashArray = [0.2, 10];
+    }
 
-   for (var i = 0; i <= viewWidth; i = i + 35) {
-       var verLine = new Path();
-       verLine.strokeColor = 'gray';
-       verLine.opacity = 1;
-       verLine.add(new Point(i, 0), new Point(i, viewHeight));
-       verLine.dashArray = [0.2,10];
-   }
-
+    for (var i = 0; i <= viewWidth; i = i + 35) {
+        var verLine = new Path();
+        verLine.strokeColor = 'gray';
+        verLine.opacity = 1;
+        verLine.add(new Point(i, 0), new Point(i, viewHeight));
+        verLine.dashArray = [0.2, 10];
+    }
 
 
 }
@@ -258,6 +256,49 @@ function moveGroupWithConns(groupName, newPosition) {
 
         renderConnection(startPoint, endPoint, true, connObject, null, null);
     }
+
+    // Move top prop connections.
+    var topConns = networkElements[groupName]["top"];
+    for (var i = 0; i < topConns.length; i++) {
+        var connObject = connectionObjects[topConns[i]]["object"]
+        if (connectionObjects[topConns[i]]["direction"] == "forward") {
+            startElement = connectionObjects[topConns[i]]["start"];
+            startPoint = networkElements[startElement]["object"].children["top-" + startElement].position;
+            endElement = groupName;
+            endPoint = networkElements[endElement]["object"].children["bottom-" + endElement].position;
+        } else {
+            startElement = groupName;
+            startPoint = networkElements[startElement]["object"].children["bottom-" + startElement].position;
+            endElement = connectionObjects[topConns[i]]["end"];
+            endPoint = networkElements[endElement]["object"].children["top-" + endElement].position;
+        }
+
+        renderConnection(startPoint, endPoint, true, connObject, null, null);
+    }
+}
+
+function movePropGroupConns(groupName, newPosition) {
+
+    // Move bottom prop connections.
+
+    var bottomConns = networkElements[groupName]["bottom"];
+
+    for (var i = 0; i < bottomConns.length; i++) {
+        var connObject = connectionObjects[bottomConns[i]]["object"]
+        if (connectionObjects[bottomConns[i]]["direction"] == "forward") {
+            startElement = connectionObjects[bottomConns[i]]["start"];
+            startPoint = networkElements[startElement]["object"].children["bottom-" + startElement].position;
+            endElement = groupName;
+            endPoint = networkElements[endElement]["object"].children["top-" + endElement].position;
+        } else {
+            startElement = groupName;
+            startPoint = networkElements[startElement]["object"].children["top-" + startElement].position;
+            endElement = connectionObjects[bottomConns[i]]["end"];
+            endPoint = networkElements[endElement]["object"].children["bottom-" + endElement].position;
+        }
+
+        renderConnection(startPoint, endPoint, true, connObject, null, null);
+    }
 }
 function fireModal() {
 
@@ -265,34 +306,16 @@ function fireModal() {
 
 
 }
-
-function drawElement(elementType, elementId, color, imageUrl) {
+function drawProperty(elementType, elementId, color, imageUrl) {
     var pathElements = null;
-    if (elementType === "circle") {
-        pathElements = drawCircleElement(paper, color, elementId);
-    }
-    else if (elementType === "rect") {
-        pathElements = drawRoundedRectElement(paper, color, elementId);
-    }
-
-
+    pathElements = drawPropertyElement(paper, color, elementId);
     pathElements[1].onMouseDown = function (event) {
+
         if (!doConnect) {
             doConnect = true;
             startPoint = this.position;
             endPoint = event.point;
             currConnectionObject = renderConnection(startPoint, endPoint, false, null, backwardConnectorColor, backwardConnectorThickness);
-            connStartElement = getGroupOfElement(networkElements, this.name);
-        }
-    };
-    pathElements[2].onMouseDown = function (event) {
-
-        if (!doConnect) {
-
-            doConnect = true;
-            startPoint = this.position;
-            endPoint = event.point;
-            currConnectionObject = renderConnection(startPoint, endPoint, false, null, forwardConnectorColor, forwardConnectorThickness);
             connStartElement = getGroupOfElement(networkElements, this.name);
         }
     };
@@ -306,31 +329,13 @@ function drawElement(elementType, elementId, color, imageUrl) {
             createConnection(connId, currConnectionObject, connStartElement, connEndElement, "forward");
         }
     };
-    pathElements[2].onMouseUp = function (event) {
-        fireModal();
-        if (doConnect) {
-            doConnect = false;
-            connectionsCount += 1;
-            var connId = "c" + connectionsCount;
-            connEndElement = getGroupOfElement(networkElements, this.name);
-            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "backward");
-        }
-    };
     pathElements[1].onMouseEnter = function (event) {
         this.strokeWidth += 4;
     };
     pathElements[1].onMouseLeave = function (event) {
         this.strokeWidth -= 4;
     };
-    pathElements[2].onMouseEnter = function (event) {
-        this.strokeWidth += 4;
-    };
-    pathElements[2].onMouseLeave = function (event) {
-        this.strokeWidth -= 4;
-    };
-
-
-    var group = new Group([pathElements[0], pathElements[1], pathElements[2]]);
+    var group = new Group([pathElements[0], pathElements[1]]);
     group.name = elementId;
     group.onDoubleClick = function (event) {
 
@@ -351,6 +356,131 @@ function drawElement(elementType, elementId, color, imageUrl) {
     };
 
 
+    function placeDiv(x_pos, y_pos, content) {
+        var d = document.getElementById('sample');
+        d.style.position = "absolute";
+        d.style.left = x_pos + 'px';
+        d.style.top = y_pos + 'px';
+        d.innerHTML = content;
+    }
+
+    group.onClick = function (event) {
+        var content = group.name;
+        placeDiv(event.point.x, event.point.y + 20, content)
+
+    }
+    group.onMouseDrag = function (event) {
+        console.log("mouse drag")
+        if (!doConnect) {
+            group.position += event.delta;
+            console.log(this.name);
+            movePropGroupConns(this.name, group.position);
+        } else {
+            renderConnection(startPoint, event.point, true, currConnectionObject, null, null);
+        }
+    };
+    group.onMouseEnter = function (event) {
+        console.log("mouse enter")
+        if (doConnect) {
+            this.dashArray = [4, 4];
+        }
+    };
+    group.onMouseLeave = function (event) {
+        console.log("mouse leave")
+        this.dashArray = [0, 0];
+    };
+    networkElements[elementId] = {};
+    networkElements[elementId]["object"] = group;
+    networkElements[elementId]["top"] = [];
+    networkElements[elementId]["bottom"] = [];
+
+}
+function drawElement(elementType, elementId, color, imageUrl) {
+    var pathElements = null;
+    if (elementType === "circle") {
+        pathElements = drawCircleElement(paper, color, elementId);
+    }
+    else if (elementType === "rect") {
+        pathElements = drawRoundedRectElement(paper, color, elementId);
+    }
+
+
+    pathElements[1].onMouseDown = function (event) {
+        if (!doConnect) {
+            doConnect = true;
+            startPoint = this.position;
+            endPoint = event.point;
+            currConnectionObject = renderConnection(startPoint, endPoint, false, null, backwardConnectorColor, backwardConnectorThickness);
+            connStartElement = getGroupOfElement(networkElements, this.name);
+        }
+    };
+    pathElements[1].onMouseUp = function (event) {
+        fireModal();
+        if (doConnect) {
+            doConnect = false;
+            connectionsCount += 1;
+            var connId = "c" + connectionsCount;
+            connEndElement = getGroupOfElement(networkElements, this.name);
+            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "forward");
+        }
+    };
+    pathElements[1].onMouseEnter = function (event) {
+        this.strokeWidth += 4;
+    };
+    pathElements[1].onMouseLeave = function (event) {
+        this.strokeWidth -= 4;
+    };
+    pathElements[2].onMouseDown = function (event) {
+
+        if (!doConnect) {
+
+            doConnect = true;
+            startPoint = this.position;
+            endPoint = event.point;
+            currConnectionObject = renderConnection(startPoint, endPoint, false, null, forwardConnectorColor, forwardConnectorThickness);
+            connStartElement = getGroupOfElement(networkElements, this.name);
+        }
+    };
+
+    pathElements[2].onMouseUp = function (event) {
+        fireModal();
+        if (doConnect) {
+            doConnect = false;
+            connectionsCount += 1;
+            var connId = "c" + connectionsCount;
+            connEndElement = getGroupOfElement(networkElements, this.name);
+            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "backward");
+        }
+    };
+
+    pathElements[2].onMouseEnter = function (event) {
+        this.strokeWidth += 4;
+    };
+    pathElements[2].onMouseLeave = function (event) {
+        this.strokeWidth -= 4;
+    };
+
+
+    var group = new Group([pathElements[0], pathElements[1], pathElements[2],pathElements[3]]);
+    group.name = elementId;
+    group.onDoubleClick = function (event) {
+
+
+        $('#elementInfo').modal('show');
+        $('#elementInfo').on('shown.bs.modal', function (event) {
+            console.log(group.name)
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = group.name;  // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Element Information - ' + recipient)
+
+        })
+
+
+    };
+
 
     function placeDiv(x_pos, y_pos, content) {
         var d = document.getElementById('sample');
@@ -362,13 +492,14 @@ function drawElement(elementType, elementId, color, imageUrl) {
 
     group.onClick = function (event) {
         var content = group.name;
-        placeDiv(event.point.x, event.point.y+20, content)
+        placeDiv(event.point.x, event.point.y + 20, content)
 
     }
     group.onMouseDrag = function (event) {
         console.log("mouse drag")
         if (!doConnect) {
             group.position += event.delta;
+            console.log(event.delta)
             moveGroupWithConns(this.name, group.position);
         } else {
             renderConnection(startPoint, event.point, true, currConnectionObject, null, null);
@@ -390,6 +521,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
     networkElements[elementId]["object"] = group;
     networkElements[elementId]["right"] = [];
     networkElements[elementId]["left"] = [];
+    networkElements[elementId]["top"] = []
 }
 
 
@@ -405,8 +537,9 @@ $(document).ready(function () {
     })
 
 
-    drawElement("rect", "element002", '#E0E0E0', null);
+    drawElement("rect", "element002", '#F0F0F0', null);
     drawElement("rect", "element003", '#E0E0E0', null);
+    drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
 
 
 });
