@@ -58,7 +58,7 @@ function onMouseUp(event) {
 }
 
 function onKeyDown(event) {
-    console.log("also")
+
     if (connClicked) {
         if (event.key === 'delete') {
             var connId = selectedConnectionObj.name;
@@ -86,7 +86,9 @@ function onKeyDown(event) {
     }
     else if (elementClicked) {
         if (event.key === 'delete') {
+
             elementId = selectedElementObj.name;
+            selectedElementObj = null;
             console.log("Deleting")
             networkElements[elementId]["object"].remove();
             delete networkElements[elementId]["object"];
@@ -97,6 +99,7 @@ function onKeyDown(event) {
         if (event.key === 'delete') {
 
             elementId = selectedPropertyObj.name;
+            selectedPropertyObj = null;
             console.log("Deleting")
             networkElements[elementId]["object"].remove();
             delete networkElements[elementId]["object"];
@@ -151,15 +154,6 @@ function drawGridLines() {
 
 }
 
-/*
- * Firing the connection modal
- */
-function addConnModal() {
-
-    $('#newConnection').modal('show');
-
-
-}
 
 /*
  * --------------------------------------
@@ -177,7 +171,7 @@ var connEndElement = null;
 var connClicked = false;
 var elementClicked = false;
 var propClicked = false;
-
+var setCurrentConnId = null;
 function renderConnection(startPoint, endPoint, isUpdate, connObject, color, thickness) {
     var helperRect = new Rectangle(startPoint, endPoint);
 
@@ -227,7 +221,6 @@ function renderConnection(startPoint, endPoint, isUpdate, connObject, color, thi
     }
     delete helperRect;
 }
-
 function createConnection(connId, connObject, startElement, endElement, connDirection) {
     connectionObjects[connId] = {};
     connObject.name = connId;
@@ -237,7 +230,6 @@ function createConnection(connId, connObject, startElement, endElement, connDire
     connectionObjects[connId]["direction"] = connDirection;
     addConnectionToGroup(connId, startElement, endElement, connDirection);
 }
-
 function addConnectionToGroup(connId, startElement, endElement, direction) {
     if (direction === "forward") {
         networkElements[startElement]["right"].push(connId);
@@ -250,7 +242,6 @@ function addConnectionToGroup(connId, startElement, endElement, direction) {
     }
 
 }
-
 function moveGroupWithConns(groupName, newPosition) {
     var startElement = groupName;
     var endElement = null;
@@ -314,7 +305,6 @@ function moveGroupWithConns(groupName, newPosition) {
         renderConnection(startPoint, endPoint, true, connObject, null, null);
     }
 }
-
 function movePropGroupConns(groupName, newPosition) {
 
     // Move bottom prop connections.
@@ -338,7 +328,6 @@ function movePropGroupConns(groupName, newPosition) {
         renderConnection(startPoint, endPoint, true, connObject, null, null);
     }
 }
-
 function drawProperty(elementType, elementId, color, imageUrl) {
     var pathElements = null;
     pathElements = drawPropertyElement(paper, color, elementId);
@@ -383,9 +372,10 @@ function drawProperty(elementType, elementId, color, imageUrl) {
     group.onDoubleClick = function (event) {
 
         $('#elementInfo').modal('show');
+        var recipient = this.name;  // Extract info from data-* attributes
         $('#elementInfo').on('shown.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = group.name;  // Extract info from data-* attributes
+
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
@@ -453,17 +443,29 @@ function drawElement(elementType, elementId, color, imageUrl) {
     //     }
     // };
 
-
-    pathElements[1].onMouseUp = function (event) {
-
+    function saveConnection(current) {
         if (doConnect) {
             doConnect = false;
             connectionsCount += 1;
             var connId = "c" + connectionsCount;
-            connEndElement = getGroupOfElement(networkElements, this.name);
+            setCurrentConnId = connId;
+            connEndElement = getGroupOfElement(networkElements, current.name);
             createConnection(connId, currConnectionObject, connStartElement, connEndElement, "forward");
+            console.log(connId)
+
         }
-        addConnModal();
+    }
+    $('#cancel-conn').click(function (event) {
+        console.log(setCurrentConnId)
+        connectionObjects[setCurrentConnId]["object"].remove();
+
+    });
+    pathElements[1].onMouseUp = function (event) {
+        $('#newConnection').modal('show');
+
+        saveConnection(this);
+
+
     };
     pathElements[1].onMouseEnter = function (event) {
         this.strokeWidth += 4;
@@ -506,7 +508,6 @@ function drawElement(elementType, elementId, color, imageUrl) {
     group.name = elementId;
 
     group.onDoubleClick = function (event) {
-
 
         $('#elementInfo').modal('show');
         $('#elementInfo').on('shown.bs.modal', function (event) {
@@ -565,8 +566,6 @@ function drawElement(elementType, elementId, color, imageUrl) {
     networkElements[elementId]["left"] = [];
     networkElements[elementId]["top"] = []
 }
-
-
 /*
  * Flow starts here
  */
@@ -574,7 +573,7 @@ $(document).ready(function () {
     drawGridLines();
 
     $('.add-element-submit').click(function () {
-        drawElement("rect", "element001", '#616161', null);
+        drawElement("rect", "newElement", '#E0E0E0', null);
 
     })
 
