@@ -125,7 +125,7 @@ function drawPropertyElement(paperObject, color, groupId) {
     return [mainRect, connectorBottom];
 }
 
-function getGroupOfElement(groupList, elementId) {
+function    getGroupOfElement(groupList, elementId) {
     for (var groupName in groupList) {
         var elemObj = groupList[groupName]["object"].children[elementId];
         if (elemObj != undefined) {

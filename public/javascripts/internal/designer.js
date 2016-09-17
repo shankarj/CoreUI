@@ -237,7 +237,12 @@ function addConnectionToGroup(connId, startElement, endElement, direction) {
         networkElements[startElement]["right"].push(connId);
         networkElements[endElement]["left"].push(connId);
     }
-    if (direction == "top") {
+    if (direction == "bottom") {
+        networkElements[startElement]["bottom"].push(connId);
+        networkElements[endElement]["top"].push(connId);
+
+    }
+    if (direction == "top"){
         networkElements[startElement]["top"].push(connId);
         networkElements[endElement]["bottom"].push(connId);
 
@@ -265,7 +270,6 @@ function moveGroupWithConns(groupName, newPosition) {
             endElement = groupName;
             endPoint = networkElements[endElement]["object"].children["right-" + endElement].position;
         }
-
         renderConnection(startPoint, endPoint, true, connObject, null, null);
     }
 
@@ -333,6 +337,7 @@ function movePropGroupConns(groupName, newPosition) {
 function drawProperty(elementType, elementId, color, imageUrl) {
     var pathElements = null;
     pathElements = drawPropertyElement(paper, color, elementId);
+    //returns element,bottom
     // pathElements[1].onMouseDown = function (event) {
     //
     //     if (!doConnect) {
@@ -343,6 +348,7 @@ function drawProperty(elementType, elementId, color, imageUrl) {
     //         connStartElement = getGroupOfElement(networkElements, this.name);
     //     }
     // };
+
     pathElements[1].onMouseUp = function (event) {
 
         if (doConnect) {
@@ -350,19 +356,22 @@ function drawProperty(elementType, elementId, color, imageUrl) {
             connectionsCount += 1;
             var connId = "c" + connectionsCount;
             connEndElement = getGroupOfElement(networkElements, this.name);
+
             createConnection(connId, currConnectionObject, connStartElement, connEndElement, "top");
         }
     };
     pathElements[1].onMouseDown = function (event) {
-
-        if (!doConnect) {
+        console.log("onPathElement 1 mouse down " + doConnect);
+        if (doConnect == false) {
             doConnect = true;
+            console.log(doConnect)
             startPoint = this.position;
             endPoint = event.point;
             currConnectionObject = renderConnection(startPoint, endPoint, false, null, forwardConnectorColor, forwardConnectorThickness);
             connStartElement = getGroupOfElement(networkElements, this.name);
         }
     };
+
     pathElements[1].onMouseEnter = function (event) {
         this.strokeWidth += 4;
     };
@@ -421,9 +430,8 @@ function drawProperty(elementType, elementId, color, imageUrl) {
     };
     networkElements[elementId] = {};
     networkElements[elementId]["object"] = group;
-    networkElements[elementId]["top"] = [];
     networkElements[elementId]["bottom"] = [];
-
+    networkElements[elementId]["top"] = [];
 }
 function drawElement(elementType, elementId, color, imageUrl) {
     var pathElements = null;
@@ -463,6 +471,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
         connectionObjects[setCurrentConnId]["object"].remove();
 
     });
+
     pathElements[1].onMouseUp = function (event) {
         $('#newConnection').modal('show');
 
@@ -486,15 +495,17 @@ function drawElement(elementType, elementId, color, imageUrl) {
             connStartElement = getGroupOfElement(networkElements, this.name);
         }
     };
-    // Remove Backward Events
+    // Top
     pathElements[3].onMouseUp = function (event) {
 
+        console.log("onPathElement 3 mouse Up " + doConnect);
         if (doConnect) {
             doConnect = false;
             connectionsCount += 1;
             var connId = "c" + connectionsCount;
             connEndElement = getGroupOfElement(networkElements, this.name);
-            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "top");
+            console.log(connEndElement)
+            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "bottom");
         }
     };
 
