@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="898caef1-af0f-4774-a678-605ef3629c1c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/internal/canvasEvents.js" afterPath="$PROJECT_DIR$/public/javascripts/internal/canvasEvents.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/internal/designer.js" afterPath="$PROJECT_DIR$/public/javascripts/internal/designer.js" />
     </list>
     <ignored path="CoreUI.iws" />
@@ -27,10 +26,12 @@
       <file leaf-file-name="designer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/internal/designer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="502" column="30" selection-start-line="502" selection-start-column="30" selection-end-line="502" selection-end-column="30" />
+            <state relative-caret-position="561">
+              <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
               <folding>
                 <element signature="e#878#901#0" expanded="false" />
+                <element signature="n#!!block;n#onKeyDown#0" expanded="false" />
+                <element signature="n#!!block;n#zoomCanvasHandler#0" expanded="false" />
                 <element signature="e#4761#4967#0" expanded="false" />
                 <element signature="n#!!block;n#renderConnection#0" expanded="false" />
               </folding>
@@ -100,8 +101,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -314,7 +317,7 @@
       <workItem from="1473998706338" duration="1814000" />
       <workItem from="1474068942758" duration="12207000" />
       <workItem from="1474130793175" duration="7709000" />
-      <workItem from="1474143347201" duration="2623000" />
+      <workItem from="1474143347201" duration="8332000" />
     </task>
     <task id="LOCAL-00001" summary="Initial UI Commit">
       <created>1469860196621</created>
@@ -435,14 +438,21 @@
       <option name="project" value="LOCAL" />
       <updated>1474085964756</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="- Property element notation defined">
+      <created>1474145999068</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1474145999068</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172905000" />
+    <option name="totallyTimeSpent" value="178614000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1369863" sideWeight="0.48820058" order="0" side_tool="false" content_ui="combo" />
@@ -538,7 +548,8 @@
     <MESSAGE value="-" />
     <MESSAGE value="- Modal Save, Cancel &#10;- Small Issue" />
     <MESSAGE value="- Bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Bug fix" />
+    <MESSAGE value="- Property element notation defined" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Property element notation defined" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -779,8 +790,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/internal/canvasEvents.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1014">
-          <caret line="127" column="12" selection-start-line="127" selection-start-column="12" selection-end-line="127" selection-end-column="12" />
+        <state relative-caret-position="261">
+          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
           <folding>
             <marker date="1474145146388" expanded="true" signature="56:1298" ph="{...}" />
             <marker date="1474145146388" expanded="true" signature="108:252" ph="{...}" />
@@ -803,10 +814,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/internal/designer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="502" column="30" selection-start-line="502" selection-start-column="30" selection-end-line="502" selection-end-column="30" />
+        <state relative-caret-position="561">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
           <folding>
             <element signature="e#878#901#0" expanded="false" />
+            <element signature="n#!!block;n#onKeyDown#0" expanded="false" />
+            <element signature="n#!!block;n#zoomCanvasHandler#0" expanded="false" />
             <element signature="e#4761#4967#0" expanded="false" />
             <element signature="n#!!block;n#renderConnection#0" expanded="false" />
           </folding>
