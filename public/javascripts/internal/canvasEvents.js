@@ -9,7 +9,6 @@ function drawCircleElement(paperObject, color, groupId) {
     });
 
 
-
     mainCircle.bringToFront();
 
     var connectorPointRight = new paperObject.Point(mainCircle.position.x + (mainCircle.bounds.width / 2), mainCircle.position.y);
@@ -48,9 +47,9 @@ function drawRoundedRectElement(paperObject, color, groupId) {
 
 
     mainRect.style = {
-        fillColor : color,
-        strokeWidth : 2,
-        strokeColor : 'lightgray'
+        fillColor: color,
+        strokeWidth: 2,
+        strokeColor: 'lightgray'
 
     }
     mainRect.bringToFront();
@@ -76,7 +75,7 @@ function drawRoundedRectElement(paperObject, color, groupId) {
         strokeWidth: connectorCircleStrokeWidth
 
     });
-    var connectorPointTop= new paperObject.Point(mainRect.position.x , mainRect.position.y - (mainRect.bounds.height / 2));
+    var connectorPointTop = new paperObject.Point(mainRect.position.x, mainRect.position.y - (mainRect.bounds.height / 2));
 
     var connectorTop = new paperObject.Path.Circle({
         name: "top-" + groupId,
@@ -103,15 +102,15 @@ function drawPropertyElement(paperObject, color, groupId) {
 
 
     mainRect.style = {
-        fillColor : color,
-        strokeWidth : 2,
-        strokeColor : 'lightgray'
+        fillColor: color,
+        strokeWidth: 2,
+        strokeColor: 'lightgray'
 
     }
     mainRect.bringToFront();
 
 
-    var connectorPointBottom= new paperObject.Point(mainRect.position.x , mainRect.position.y + (mainRect.bounds.height / 2));
+    var connectorPointBottom = new paperObject.Point(mainRect.position.x, mainRect.position.y + (mainRect.bounds.height / 2));
 
     var connectorBottom = new paperObject.Path.Circle({
         name: "bottom-" + groupId,
@@ -121,7 +120,6 @@ function drawPropertyElement(paperObject, color, groupId) {
         strokeColor: connectorPropertyCircleStrokeColor,
         strokeWidth: connectorCircleStrokeWidth
     });
-
 
 
     return [mainRect, connectorBottom];
@@ -135,3 +133,6 @@ function getGroupOfElement(groupList, elementId) {
         }
     }
 }
+
+
+

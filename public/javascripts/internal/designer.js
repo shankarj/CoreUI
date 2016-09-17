@@ -13,6 +13,8 @@ var selectedConnRevertThickness = 0;
 var selectedConnRevertColor = null;
 var doConnect = false;
 var connectionsCount = 0;
+var nElements = [];
+var deployJson = null;
 
 // Canvas Object event inits.
 var canvasObject = document.getElementById("networkCanvas");
@@ -455,6 +457,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
 
         }
     }
+
     $('#cancel-conn').click(function (event) {
         console.log(setCurrentConnId)
         connectionObjects[setCurrentConnId]["object"].remove();
@@ -573,15 +576,35 @@ $(document).ready(function () {
     drawGridLines();
 
     $('.add-element-submit').click(function () {
-        drawElement("rect", "newElement", '#E0E0E0', null);
+
+
+        drawElement("rect", "newElement" + (nElements.length + 1), '#E0E0E0', null);
+        var tem = {
+            'id': nElements.length + 1,
+            'type': 'normal',
+            'nLeft': 0,
+            'nRight': 0,
+            'nTop': 0
+
+        }
+
+        nElements.push(tem)
+
+        deployJson = JSON.stringify(nElements);
 
     })
 
+    $('#deploy').click(function () {
+
+        console.log(deployJson)
+
+
+    })
 
     drawElement("rect", "element002", '#F0F0F0', null);
     drawElement("rect", "element003", '#E0E0E0', null);
     drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
-    drawProperty("somethingelse", "another", "#424242", null);
+    // drawProperty("somethingelse", "another", "#424242", null);
 
 
 });
