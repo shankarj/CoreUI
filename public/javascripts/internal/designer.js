@@ -59,6 +59,7 @@ function onMouseUp(event) {
     }
 }
 function deleteConnection(connId) {
+    debugger;
     var startElement = connectionObjects[connId]["start"];
     var endElement = connectionObjects[connId]["end"];
     if (connectionObjects[connId]["direction"] == "forward") {
@@ -94,33 +95,51 @@ function onKeyDown(event) {
             console.log("Deleting element")
 
             if (networkElements[elementId]["left"]) {
+                console.log("left")
+                delList = [];
+
                 for (var i = 0; i < networkElements[elementId]["left"].length; i++) {
                     delList.push(networkElements[elementId]["left"][i]);
 
                 }
+                for (var e in delList) {
+                    console.log(delList[e])
+                    deleteConnection(delList[e])
+                }
 
 
             }
-
             if (networkElements[elementId]["right"]) {
+                console.log("right")
+                delList = [];
+
                 for (var i = 0; i < networkElements[elementId]["right"].length; i++) {
                     delList.push(networkElements[elementId]["right"][i]);
                 }
-
+                    console.log(delList)
+                for (var e in delList) {
+                    console.log(delList[e])
+                    deleteConnection(delList[e])
+                }
             }
             if (networkElements[elementId]["top"]) {
+                console.log("top")
+
+                delList = [];
+
                 for (var i = 0; i < networkElements[elementId]["top"].length; i++) {
                     delList.push(networkElements[elementId]["top"][i]);
                 }
+                for (var e in delList) {
+                    console.log(delList[e])
+                    deleteConnection(delList[e])
+                }
             }
 
-            console.log(delList.length)
+
+
             networkElements[elementId]["object"].remove();
-            for (var e in delList) {
-                deleteConnection(delList[e])
-            }
 
-            view.update();
 
 
         }
@@ -132,6 +151,7 @@ function onKeyDown(event) {
             console.log("Deleting prop")
 
             if (networkElements[elementId]["bottom"]) {
+                delList = [];
                 for (var i = 0; i < networkElements[elementId]["bottom"].length; i++) {
 
                     delList.push(networkElements[elementId]["bottom"][i]);
@@ -140,11 +160,11 @@ function onKeyDown(event) {
             }
             networkElements[elementId]["object"].remove();
 
-
             for (var e in delList) {
                 console.log(delList[e])
                 deleteConnection(delList[e])
             }
+
 
             view.update();
 
@@ -152,6 +172,8 @@ function onKeyDown(event) {
         }
 
     }
+
+    view.update();
 
 }
 function zoomCanvasHandler(e) {
