@@ -15,7 +15,7 @@ var doConnect = false;
 var connectionsCount = 0;
 var nElements = [];
 var deployJson = null;
-
+var delList = [];
 // Canvas Object event inits.
 var canvasObject = document.getElementById("networkCanvas");
 // canvasObject.addEventListener("mousewheel", zoomCanvasHandler, false); // For IE, Chrome
@@ -58,58 +58,101 @@ function onMouseUp(event) {
         doConnect = false;
     }
 }
-
+function deleteConnection(connId) {
+    var startElement = connectionObjects[connId]["start"];
+    var endElement = connectionObjects[connId]["end"];
+    if (connectionObjects[connId]["direction"] == "forward") {
+        var index = networkElements[startElement]["right"].indexOf(connId);
+        networkElements[startElement]["right"].splice(index, 1);
+        index = networkElements[endElement]["left"].indexOf(connId);
+        networkElements[endElement]["left"].splice(index, 1);
+    }
+    if (connectionObjects[connId]["direction"] == "bottom") {
+        var index = networkElements[startElement]["bottom"].indexOf(connId);
+        networkElements[startElement]["bottom"].splice(index, 1);
+        index = networkElements[endElement]["top"].indexOf(connId);
+        networkElements[endElement]["top"].splice(index, 1);
+    }
+    selectedConnectionObj = null;
+    connectionObjects[connId]["object"].remove();
+    delete connectionObjects[connId];
+    connClicked = false;
+    view.update();
+}
 function onKeyDown(event) {
 
     if (connClicked) {
         if (event.key === 'delete') {
             var connId = selectedConnectionObj.name;
-            var startElement = connectionObjects[connId]["start"];
-            var endElement = connectionObjects[connId]["end"];
-            if (connectionObjects[connId]["direction"] == "forward") {
-                var index = networkElements[startElement]["right"].indexOf(connId);
-                networkElements[startElement]["right"].splice(index, 1);
-                index = networkElements[endElement]["left"].indexOf(connId);
-                networkElements[endElement]["left"].splice(index, 1);
-            } else {
-                var index = networkElements[startElement]["left"].indexOf(connId);
-                networkElements[startElement]["left"].splice(index, 1);
-                index = networkElements[endElement]["right"].indexOf(connId);
-                networkElements[endElement]["right"].splice(index, 1);
-            }
-
-            selectedConnectionObj = null;
-            connectionObjects[connId]["object"].remove();
-            delete connectionObjects[connId];
-
-            connClicked = false;
-            view.update();
+            deleteConnection(connId);
         }
     }
     else if (elementClicked) {
         if (event.key === 'delete') {
-
             elementId = selectedElementObj.name;
             selectedElementObj = null;
-            console.log("Deleting")
+            console.log("Deleting element")
+
+            if (networkElements[elementId]["left"]) {
+                for (var i = 0; i < networkElements[elementId]["left"].length; i++) {
+                    delList.push(networkElements[elementId]["left"][i]);
+
+                }
+
+
+            }
+
+            if (networkElements[elementId]["right"]) {
+                for (var i = 0; i < networkElements[elementId]["right"].length; i++) {
+                    delList.push(networkElements[elementId]["right"][i]);
+                }
+
+            }
+            if (networkElements[elementId]["top"]) {
+                for (var i = 0; i < networkElements[elementId]["top"].length; i++) {
+                    delList.push(networkElements[elementId]["top"][i]);
+                }
+            }
+
+            console.log(delList.length)
             networkElements[elementId]["object"].remove();
-            delete networkElements[elementId]["object"];
+            for (var e in delList) {
+                deleteConnection(delList[e])
+            }
+
             view.update();
+
+
         }
     }
     else if (propClicked) {
         if (event.key === 'delete') {
-
             elementId = selectedPropertyObj.name;
             selectedPropertyObj = null;
-            console.log("Deleting")
+            console.log("Deleting prop")
+
+            if (networkElements[elementId]["bottom"]) {
+                for (var i = 0; i < networkElements[elementId]["bottom"].length; i++) {
+
+                    delList.push(networkElements[elementId]["bottom"][i]);
+                }
+
+            }
             networkElements[elementId]["object"].remove();
-            delete networkElements[elementId]["object"];
+
+
+            for (var e in delList) {
+                console.log(delList[e])
+                deleteConnection(delList[e])
+            }
+
             view.update();
+
 
         }
 
     }
+
 }
 function zoomCanvasHandler(e) {
     var e = window.event || e; // old IE support
@@ -210,6 +253,7 @@ function renderConnection(startPoint, endPoint, isUpdate, connObject, color, thi
                 selectedConnRevertColor = this.strokeColor;
                 this.strokeColor = 'red';
                 connClicked = true;
+
                 selectedConnectionObj = this;
             }
         };
@@ -294,6 +338,7 @@ function moveGroupWithConns(groupName, newPosition) {
 
     // Move top prop connections.
     var topConns = networkElements[groupName]["top"];
+
     for (var i = 0; i < topConns.length; i++) {
         var connObject = connectionObjects[topConns[i]]["object"]
         if (connectionObjects[topConns[i]]["direction"] == "bottom") {
@@ -307,9 +352,7 @@ function moveGroupWithConns(groupName, newPosition) {
     }
 }
 function movePropGroupConns(groupName, newPosition) {
-
     // Move bottom prop connections.
-
     var bottomConns = networkElements[groupName]["bottom"];
 
     for (var i = 0; i < bottomConns.length; i++) {
@@ -344,6 +387,7 @@ function drawProperty(elementType, elementId, color, imageUrl) {
     propPathElements[1].onMouseDown = function (event) {
         console.log("onPathElement 1 mouse down " + doConnect);
         if (!doConnect) {
+
             doConnect = true;
             console.log(doConnect)
             startPoint = this.position;
@@ -362,7 +406,6 @@ function drawProperty(elementType, elementId, color, imageUrl) {
     var group = new Group([propPathElements[0], propPathElements[1]]);
     group.name = elementId;
     group.onDoubleClick = function (event) {
-
         $('#elementInfo').modal('show');
         var recipient = this.name;  // Extract info from data-* attributes
         $('#elementInfo').on('shown.bs.modal', function (event) {
@@ -372,10 +415,7 @@ function drawProperty(elementType, elementId, color, imageUrl) {
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('.modal-title').text('Element Information - ' + recipient)
-
         })
-
-
     };
 
 
@@ -389,6 +429,7 @@ function drawProperty(elementType, elementId, color, imageUrl) {
 
     group.onClick = function (event) {
         propClicked = true;
+        elementClicked = false;
         selectedPropertyObj = this;
         var content = group.name;
         placeDiv(event.point.x, event.point.y + 20, content)
@@ -478,7 +519,6 @@ function drawElement(elementType, elementId, color, imageUrl) {
     // Property bottom to top
     pathElements[3].onMouseUp = function (event) {
 
-        console.log("onPathElement 3 mouse Up " + doConnect);
         if (doConnect) {
             doConnect = false;
             connectionsCount += 1;
@@ -532,6 +572,7 @@ function drawElement(elementType, elementId, color, imageUrl) {
 
 
     group.onClick = function (event) {
+        propClicked = false;
         elementClicked = true;
         selectedElementObj = this;
         var content = group.name;
@@ -542,7 +583,6 @@ function drawElement(elementType, elementId, color, imageUrl) {
         if (!doConnect) {
             group.position += event.delta;
             moveGroupWithConns(this.name, group.position);
-
         } else {
             renderConnection(startPoint, event.point, true, currConnectionObject, null, null);
         }
