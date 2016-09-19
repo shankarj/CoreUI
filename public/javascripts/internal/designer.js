@@ -59,7 +59,7 @@ function onMouseUp(event) {
     }
 }
 function deleteConnection(connId) {
-    debugger;
+
     var startElement = connectionObjects[connId]["start"];
     var endElement = connectionObjects[connId]["end"];
     if (connectionObjects[connId]["direction"] == "forward") {
@@ -116,7 +116,7 @@ function onKeyDown(event) {
                 for (var i = 0; i < networkElements[elementId]["right"].length; i++) {
                     delList.push(networkElements[elementId]["right"][i]);
                 }
-                    console.log(delList)
+                console.log(delList)
                 for (var e in delList) {
                     console.log(delList[e])
                     deleteConnection(delList[e])
@@ -137,9 +137,7 @@ function onKeyDown(event) {
             }
 
 
-
             networkElements[elementId]["object"].remove();
-
 
 
         }
@@ -198,29 +196,6 @@ function zoomCanvasHandler(e) {
     }
 }
 
-/*
- * Drawing grid lines.
- */
-function drawGridLines() {
-    for (var i = 0; i <= viewHeight; i = i + 35) {
-        var horLine = new Path();
-        horLine.strokeColor = 'gray';
-        horLine.opacity = 1;
-        horLine.add(new Point(0, i), new Point(viewWidth, i));
-        horLine.dashArray = [0.2, 10];
-    }
-
-    for (var i = 0; i <= viewWidth; i = i + 35) {
-        var verLine = new Path();
-        verLine.strokeColor = 'gray';
-        verLine.opacity = 1;
-        verLine.add(new Point(i, 0), new Point(i, viewHeight));
-        verLine.dashArray = [0.2, 10];
-    }
-
-
-}
-
 
 /*
  * --------------------------------------
@@ -239,6 +214,8 @@ var connClicked = false;
 var elementClicked = false;
 var propClicked = false;
 var setCurrentConnId = null;
+
+
 function renderConnection(startPoint, endPoint, isUpdate, connObject, color, thickness) {
     var helperRect = new Rectangle(startPoint, endPoint);
 
@@ -478,7 +455,7 @@ function drawProperty(elementType, elementId, color, imageUrl) {
 
 
 }
-function drawElement(elementType, elementId, color, imageUrl) {
+function drawElement(elementType, elementId, color, det) {
     var pathElements = null;
     if (elementType === "circle") {
         pathElements = drawCircleElement(paper, color, elementId);
@@ -619,37 +596,43 @@ function drawElement(elementType, elementId, color, imageUrl) {
         this.dashArray = [0, 0];
     };
 
-
     networkElements[elementId] = {};
     networkElements[elementId]["object"] = group;
     networkElements[elementId]["right"] = [];
     networkElements[elementId]["left"] = [];
-    networkElements[elementId]["top"] = []
+    networkElements[elementId]["top"] = [];
+    networkElements[elementId]["init"] = {};
+    debugger;
+    networkElements[elementId]["_type"] = det["element_type"];
+    networkElements[elementId]["props"] = det["props_json"];
+    networkElements[elementId]["props_interface"] = det["props_interface_json"];
 }
+var drawGridLines = function () {
+    for (var i = 0; i <= viewHeight; i = i + 35) {
+        var horLine = new Path();
+        horLine.strokeColor = 'gray';
+        horLine.opacity = 1;
+        horLine.add(new Point(0, i), new Point(viewWidth, i));
+        horLine.dashArray = [0.2, 10];
+    }
+
+    for (var i = 0; i <= viewWidth; i = i + 35) {
+        var verLine = new Path();
+        verLine.strokeColor = 'gray';
+        verLine.opacity = 1;
+        verLine.add(new Point(i, 0), new Point(i, viewHeight));
+        verLine.dashArray = [0.2, 10];
+    }
+
+
+}
+
 /*
  * Flow starts here
  */
 $(document).ready(function () {
     drawGridLines();
 
-    $('.add-element-submit').click(function () {
-
-
-        drawElement("rect", "newElement" + (nElements.length + 1), '#E0E0E0', null);
-        var tem = {
-            'id': nElements.length + 1,
-            'type': 'normal',
-            'nLeft': 0,
-            'nRight': 0,
-            'nTop': 0
-
-        }
-
-        nElements.push(tem)
-
-        deployJson = JSON.stringify(nElements);
-
-    })
 
     $('#deploy').click(function () {
 
@@ -658,10 +641,56 @@ $(document).ready(function () {
 
     })
 
-    drawElement("rect", "element002", '#F0F0F0', null);
-    drawElement("rect", "element003", '#E0E0E0', null);
-    drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
+
+    // drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
     // drawProperty("somethingelse", "another", "#424242", null);
 
 
 });
+$('#newElement').on('shown.bs.modal', function () {
+    $.ajax({
+        url: "http://localhost:8083/api/elements/all/admin",
+        crossDomain: true
+    }).done(function (data) {
+
+        //Empty the element list
+        $('#element').empty();
+        for (var i = 0; i < data.length; i++) {
+
+            var name = data[i].element_name;
+            var categ = data[i].category_name;
+            var eid = data[i].element_id;
+
+
+            //Append every element with it's category
+            $('#element').append('<li><label class="tree-toggler nav-header card text-md-center h4 bg-info">' + name + '</label><ul class="nav nav-list tree"><li class="card h5 offset-lg-2" ><span>' + categ + '</span><br><a href="#" id="' + eid + '"><label class="radio-inline"> <input name="radioGroup" id="radio1" value="option1" type="radio">' + name + '</label></a></li></li></ul></li>')
+
+            $('#' + data[i].element_id).click(function () {
+                var currentElement = this;
+                $.ajax({
+                    url: "http://localhost:8083/api/elements/details/" + this.id,
+                    crossDomain: true
+                }).done(function (data) {
+                    $('.element').html($(currentElement).parent().parent().siblings().html());
+                    $('.desc').html(data["description_json"])
+                    elementName_ = $(currentElement).parent().parent().siblings().html();
+                    elementId_ = currentElement.id;
+                    category_ = $(currentElement).siblings().html();
+                    details_ = data;
+                });
+
+            })
+        }
+
+
+    });
+
+
+});
+$('.add-element-submit').click(function (event) {
+    // printInConsole();
+    console.log("heloo")
+    drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#E0E0E0', details_);
+    reset();
+
+})

@@ -91,7 +91,8 @@
 
     <div class="toolbar">
         <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block add-element"
-                data-toggle="modal" data-target="#newElement" data-placement="left" title="Create New Element">
+                data-toggle="modal" id='addElement' data-target="#newElement" data-placement="left"
+                title="Create New Element">
             <i class="fa fa-plus fa-1x"></i></button>
         <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block"
                 data-toggle="modal" data-placement="left" title="Element delete"
@@ -206,46 +207,14 @@
             </div>
             <div class="modal-body row">
                 <div class="col-lg-5">
-                    <ul class="nav nav-list container">
-                        <li>
-                            <label class="tree-toggler nav-header card text-md-center h4 bg-info">Category 1</label>
-                            <ul class="nav nav-list tree">
-                                <li class="card h5 offset-lg-2">Square</li>
-                                <li class="card h5 offset-lg-2">Circle
-                                </li>
-
-                            </ul>
-
-                        </li>
-                        <li>
-                            <label class="tree-toggler nav-header card text-md-center h4 bg-info">Category 2</label>
-                            <ul class="nav nav-list tree">
-                                <li class="card h5 offset-lg-2">Square</li>
-                                <li class="card h5 offset-lg-2">Circle
-                                </li>
-
-                            </ul>
-
-                        </li>
-
+                    <ul class="nav nav-list container" id="element">
 
                     </ul>
-
                 </div>
                 <div class="col-lg-7">
-                    <h4>Element1</h4>
+                    <h4 class="element text-primary">Element </h4>
 
-                    <p>
-                        For 50 years, WWF has been protecting the future of nature. The world's leading conservation
-                        organization, WWF works in 100 countries and is supported by 1.2 million members in the United
-                        States and close to 5 million globally.
-                    </p>
-                    <h4>During Forward Pass</h4>
-                    <p> For 50 years, WWF has been protecting the future of nature. The world's leading conservation
-                        organization, WWF works in 100 countries and is supported by 1.2 million members in the United
-                        States and close to 5 million globally.
-                    </p>
-
+                    <p class="desc text-primary">Description</p>
 
                 </div>
 
@@ -308,10 +277,11 @@
 
 
 <!-- End wrapper-->
+<script src="/javascripts/internal/internalStorage.js"></script>
+
 <!--Paper scripts-->
 
 <script type="text/javascript" src="/javascripts/internal/settings.js"></script>
-<script type="text/javascript" src="/javascripts/internal/deploy.js"></script>
 <script type="text/javascript" src="/javascripts/internal/canvasEvents.js"></script>
 <script type="text/paperscript" src="/javascripts/internal/designer.js" canvas="networkCanvas"></script>
 
@@ -359,27 +329,8 @@
 
 <script src="/stylesheets/vendor/toastr/toastr.min.js"></script>
 <script src="/stylesheets/vendor/sparkline/index.js"></script>
-
-<!-- Initailizing Script - Can be externalized later -->
-<script>
-    $(function () {
-        $('.tooltip-feature').tooltip()
-
-        $('.nav-item').click(function () {
-            $('.nav-item').removeClass('active');
-            $(this).addClass('active')
-
-
-        })
-        $('label.tree-toggler').click(function () {
-
-            $(this).parent().children('ul.tree').toggle(300);
-        });
-
-
-    })
-
-</script>
+<!-- InternalCore -->
+<script src="/javascripts/internal/internalCore.js"></script>
 
 </body>
 
