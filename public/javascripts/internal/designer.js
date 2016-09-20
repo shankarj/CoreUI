@@ -266,13 +266,26 @@ function renderConnection(startPoint, endPoint, isUpdate, connObject, color, thi
     }
     delete helperRect;
 }
-function createConnection(connId, connObject, startElement, endElement, connDirection) {
+function createConnection(connId, connObject, startElement, endElement, connDirection, startProps, endProps) {
     connectionObjects[connId] = {};
     connObject.name = connId;
     connectionObjects[connId]["object"] = connObject;
     connectionObjects[connId]["start"] = startElement;
     connectionObjects[connId]["end"] = endElement;
     connectionObjects[connId]["direction"] = connDirection;
+
+    if (endProps) {
+        var st = JSON.parse(startProps);
+        console.log(st);
+        var end = JSON.parse(endProps);
+
+        connectionObjects[connId]["mapping"] = {};
+        connectionObjects[connId]["mapping"][Object.keys(st)[0]] = Object.keys(end)[0];
+    } else {
+        var st = JSON.parse(startProps);
+        connectionObjects[connId]["mapping"] = Object.keys(st)[0];
+    }
+    console.log(connectionObjects[connId])
     addConnectionToGroup(connId, startElement, endElement, connDirection);
 }
 function addConnectionToGroup(connId, startElement, endElement, direction) {
@@ -472,8 +485,9 @@ function drawElement(elementType, elementId, color, det) {
             var connId = "c" + connectionsCount;
             setCurrentConnId = connId;
             connEndElement = getGroupOfElement(networkElements, current.name);
-            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "forward");
-            console.log(connId)
+            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "forward", networkElements[connStartElement]["props"], networkElements[connEndElement]["props"]);
+            console.log(connId);
+            console.log(connectionObjects);
 
         }
     }
@@ -487,7 +501,6 @@ function drawElement(elementType, elementId, color, det) {
 
     pathElements[1].onMouseUp = function (event) {
         $('#newConnection').modal('show');
-
         saveConnection(this);
 
 
@@ -524,12 +537,12 @@ function drawElement(elementType, elementId, color, det) {
             var connId = "c" + connectionsCount;
             console.log(connId)
             connEndElement = getGroupOfElement(networkElements, this.name);
-            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "bottom");
+            console.log(networkElements[connEndElement]["props"])
+            createConnection(connId, currConnectionObject, connStartElement, connEndElement, "bottom", networkElements[connEndElement]["props"], null);
         }
     };
     // Property both sides
     pathElements[3].onMouseDown = function (event) {
-
         if (!doConnect) {
             doConnect = true;
             startPoint = this.position;
@@ -540,11 +553,17 @@ function drawElement(elementType, elementId, color, det) {
     };
 
 
-    var group = new Group([pathElements[0], pathElements[1], pathElements[2], pathElements[3]]);
+    var group = new Group([pathElements[0], pathElements[1], pathElements[2], pathElements[3], pathElements[4], pathElements[5]]);
     group.name = elementId;
 
-    group.onDoubleClick = function (event) {
 
+    group.onFrame = function (event) {
+        // var offset = Math.sin(event.count / 30) * 30 - 40;
+        // this.position.y = view.center.y - offset;
+    }
+
+
+    group.onDoubleClick = function (event) {
         $('#elementInfo').modal('show');
         $('#elementInfo').on('shown.bs.modal', function (event) {
 
@@ -571,6 +590,7 @@ function drawElement(elementType, elementId, color, det) {
 
 
     group.onClick = function (event) {
+
         propClicked = false;
         elementClicked = true;
         selectedElementObj = this;
@@ -596,13 +616,13 @@ function drawElement(elementType, elementId, color, det) {
         this.dashArray = [0, 0];
     };
 
+
     networkElements[elementId] = {};
     networkElements[elementId]["object"] = group;
     networkElements[elementId]["right"] = [];
     networkElements[elementId]["left"] = [];
     networkElements[elementId]["top"] = [];
     networkElements[elementId]["init"] = {};
-    debugger;
     networkElements[elementId]["_type"] = det["element_type"];
     networkElements[elementId]["props"] = det["props_json"];
     networkElements[elementId]["props_interface"] = det["props_interface_json"];
@@ -643,7 +663,7 @@ $(document).ready(function () {
 
 
     // drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
-    // drawProperty("somethingelse", "another", "#424242", null);
+    drawProperty("somethingelse", "another", "#424242", null);
 
 
 });
@@ -660,10 +680,10 @@ $('#newElement').on('shown.bs.modal', function () {
             var name = data[i].element_name;
             var categ = data[i].category_name;
             var eid = data[i].element_id;
+//Append every element with it's category
+            // On radio button checked trigger the event. A change that has to be done for good UX.
+            $('#element').append('<li><label class="tree-toggler nav-header h3">' + categ + '</label><ul class="nav nav-list tree"><li class="h5 offset-lg-2" ><a href="#" id="' + eid + '"><label class="radio-inline"> <input name="radioGroup" id="radio1" value="option1" type="radio" checked=""></label></a>&nbsp;<span>' + name + '</span></li></li></ul></li>')
 
-
-            //Append every element with it's category
-            $('#element').append('<li><label class="tree-toggler nav-header card text-md-center h4 bg-info">' + name + '</label><ul class="nav nav-list tree"><li class="card h5 offset-lg-2" ><span>' + categ + '</span><br><a href="#" id="' + eid + '"><label class="radio-inline"> <input name="radioGroup" id="radio1" value="option1" type="radio">' + name + '</label></a></li></li></ul></li>')
 
             $('#' + data[i].element_id).click(function () {
                 var currentElement = this;
@@ -689,8 +709,6 @@ $('#newElement').on('shown.bs.modal', function () {
 });
 $('.add-element-submit').click(function (event) {
     // printInConsole();
-    console.log("heloo")
     drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#E0E0E0', details_);
     reset();
-
 })

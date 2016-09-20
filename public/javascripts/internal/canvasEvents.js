@@ -40,12 +40,9 @@ function drawCircleElement(paperObject, color, groupId) {
 function drawRoundedRectElement(paperObject, color, groupId) {
 
     var rectangle = new paperObject.Rectangle(paperObject.view.center, new paperObject.Point(paperObject.view.center.x + 180, paperObject.view.center.y + 50));
-    var cornerSize = new paperObject.Size(10, 10);
+    var cornerSize = new paperObject.Size(30, 30);
     var mainRect = new paperObject.Path.RoundRectangle(rectangle, cornerSize);
-
     mainRect.name = "core-" + groupId;
-
-
     mainRect.style = {
         fillColor: color,
         strokeWidth: 2,
@@ -56,10 +53,20 @@ function drawRoundedRectElement(paperObject, color, groupId) {
 
     var connectorPointRight = new paperObject.Point(mainRect.position.x + (mainRect.bounds.width / 2), mainRect.position.y);
     var connectorPointLeft = new paperObject.Point(mainRect.position.x - (mainRect.bounds.width / 2), mainRect.position.y);
+    var firstRightSegment = new paperObject.Segment(connectorPointRight, null, null)
+    var secondRightSegment = new paperObject.Segment(new paperObject.Point(mainRect.position.x + (mainRect.bounds.width / 2) + 10, mainRect.position.y), null, null);
+
+    var firstLeftSegment = new paperObject.Segment(connectorPointLeft, null, null)
+    var secondLeftSegment = new paperObject.Segment(new paperObject.Point(mainRect.position.x - (mainRect.bounds.width / 2) - 10, mainRect.position.y), null, null);
+
+    var linesegL = new paperObject.Path(firstLeftSegment, secondLeftSegment);
+    var linesegR = new paperObject.Path(firstRightSegment, secondRightSegment);
+    linesegR.strokeColor = 'black';
+    linesegL.strokeColor = 'black';
 
     var connectorLeft = new paperObject.Path.Circle({
         name: "left-" + groupId,
-        center: connectorPointLeft,
+        center: new paperObject.Point(mainRect.position.x - (mainRect.bounds.width / 2) - 15, mainRect.position.y),
         radius: connectorCircleRadius,
         fillColor: connectorCircleColor,
         strokeColor: connectorCircleStrokeColor,
@@ -68,7 +75,7 @@ function drawRoundedRectElement(paperObject, color, groupId) {
 
     var connectorRight = new paperObject.Path.Circle({
         name: "right-" + groupId,
-        center: connectorPointRight,
+        center: new paperObject.Point(mainRect.position.x + (mainRect.bounds.width / 2) + 15, mainRect.position.y),
         radius: connectorCircleRadius,
         fillColor: connectorCircleColor,
         strokeColor: connectorCircleStrokeColor,
@@ -85,11 +92,7 @@ function drawRoundedRectElement(paperObject, color, groupId) {
         strokeColor: connectorPropertyCircleStrokeColor,
         strokeWidth: connectorCircleStrokeWidth
     });
-
-
-    connectorLeft.bringToFront();
-    connectorRight.bringToFront();
-    return [mainRect, connectorLeft, connectorRight, connectorTop];
+    return [mainRect, connectorLeft, connectorRight, connectorTop, linesegR,linesegL];
 }
 
 function drawPropertyElement(paperObject, color, groupId) {

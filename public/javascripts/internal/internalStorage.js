@@ -19,8 +19,7 @@ function printInConsole() {
     console.log("id " + elementId_);
     console.log("category " + category_);
     console.log(details_);
-    console.log("details " + details_.props_json)
-    console.log(details_.props_interface_json);
+
 
 }
 
