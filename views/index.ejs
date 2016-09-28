@@ -22,10 +22,13 @@
     <link rel="stylesheet" href="/stylesheets/pe-icons/pe-icon-7-stroke.css"/>
     <link rel="stylesheet" href="/stylesheets/pe-icons/helper.css"/>
 
+    <!--Custom CSS Files-->
+    <link rel="stylesheet" href="/stylesheets/colors.css">
+
     <link rel="stylesheet" href="/stylesheets/style.css">
 
     <!--Animate CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/stylesheets/animate.css">
 
     <!--Intro JS CSS -->
     <link rel="stylesheet" href="/javascripts/external/introJS/intro.css">
@@ -100,7 +103,7 @@
 
 
     </div>
-    <span class="tag tag-default tag-pill pull-xs-right" id="sample"></span>
+    <span id="sample"></span>
     <div class="deploy container" style="opacity:0;position: absolute; right: 0;bottom:0; margin: 1%;">
         <button type="button" class="btn btn-outline-mute text-muted btn-block btn-lg" data-toggle="modal"
 
@@ -111,7 +114,9 @@
     <!-- iStack:0 : Different categories and functions = Shapes & Tags -->
     <!-- iStack:1 : Canvas scrolling like node red project -->
 
-    <div class="canvasDiv"><canvas id="networkCanvas"></canvas></div>
+    <div class="canvasDiv">
+        <canvas id="networkCanvas"></canvas>
+    </div>
 
     <!-- End main content-->
 

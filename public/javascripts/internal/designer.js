@@ -582,7 +582,6 @@ function drawElement(elementType, elementId, color, det) {
 
     function placeDiv(x_pos, y_pos, content) {
         var d = document.getElementById('sample');
-        d.style.position = "absolute";
         d.style.left = x_pos + 'px';
         d.style.top = y_pos + 'px';
         d.innerHTML = content;

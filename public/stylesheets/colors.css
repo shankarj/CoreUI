@@ -1,0 +1,20 @@
+
+:root {
+    /*Navigation Active Arrow*/
+    --nav-font: #607D8B;
+    --nav-bg: #f0f0f0;
+    --active-arrow: #AD1457;
+
+    /*Canvas*/
+    --canvas-bg: #262938;
+
+    /*btn*/
+    --btn-hover: #455A64;
+    --btn-hover-font: #5bc0de;
+    /*Toolbar*/
+    --toolbar-font: #FFFFFF;
+    --toolbar-bg: #263238;
+
+    /*Generic*/
+
+}

@@ -17,18 +17,22 @@ Custom outline
 */
 
 .btn-outline-cus {
-    border-color: #ffffff;
+    border-color: white;
+    border-style: solid solid;
+    border-width: medium;
 }
 
 .btn-outline-cus:hover {
-    color: #5bc0de;
+    color: var(--btn-hover-font);
     background-image: none;
-    background-color: #455A64;
-    border-color: #ffffff;
+    background-color: var(--btn-hover);
+    border-color: white;
 }
 
+/*Add btn on focus ! */
+
 .wrapper {
-    background-color: #263238;
+    background-color: var(--canvas-bg);
 
 }
 
@@ -44,12 +48,6 @@ canvas {
     width: inherit;
     height: inherit;
 
-
-}
-
-.nav {
-    height: 12px;
-    width: auto;
 }
 
 .nav > .nav-item.active:after {
@@ -63,9 +61,15 @@ canvas {
     border-width: 13px;
 
     border-style: outset outset solid;
-    border-color: transparent transparent #00838F;
+    border-color: transparent transparent var(--active-arrow);
     transition: opacity 0.4s ease-out;
 
+}
+
+#sample {
+    position: absolute;
+    color: white;
+    font-weight: bold;
 }
 
 .btn-circle {
@@ -123,13 +127,13 @@ canvas {
 }
 
 nav {
-    background-color: #f0f0f0;
-    width: auto;
+    background-color: var(--nav-bg);
+    height: 9.5%;
 
 }
 
 .nav-item > a > h1, h2, h3, h4, h5, h6 {
-    color: #f0f0f0;
+
     font-family: Montserrat;
     font-size: 15px;
     font-style: normal;
@@ -139,7 +143,7 @@ nav {
     letter-spacing: 1.5px;
     margin-top: -1px;
     padding-top: 10px;
-    color: #607D8B;
+    color: var(--nav-font);
 
 }
 
@@ -151,7 +155,7 @@ nav {
 
 nav {
 
-    border-bottom: 10px solid #00838F;
+    border-bottom: 10px solid var(--active-arrow);
     font-size: 8px;
 
 }
@@ -206,11 +210,11 @@ nav {
     margin-left: 15%;
     margin-right: 15%;
     margin-bottom: 30%;
-    background-color: #263238;
+    background-color: var(--toolbar-bg);
 }
 
 .toolbar > button > i {
-    color: white;
+    color: var(--toolbar-font);
 
 }
 
