@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/stylesheets/vendor/animate.css/animate.css"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/javascripts/external/bootstrap/dist/css/bootstrap.css">
+
     <link rel="stylesheet" href="/stylesheets/vendor/toastr/toastr.min.css"/>
 
     <!-- App styles -->
@@ -28,7 +29,9 @@
 
     <!--Intro JS CSS -->
     <link rel="stylesheet" href="/javascripts/external/introJS/intro.css">
-
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Salsa"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Candal"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat">
     <!-- Paper js -->
     <% include ./common/scripts %>
 
@@ -38,14 +41,11 @@
 <div class="wrapper">
 
     <!-- Header-->
+    <!--<a href="#" class="navbar-brand"><span class="word2">dexe</span><span class="word1"> l</span> </a>-->
 
-    <nav class="navbar navbar-dark" role="navigation">
+    <nav class="navbar navbar-dark" role="navigation" style="border-radius: ">
 
-
-        <a href="#" class="navbar-brand"><span class="word2">dexe</span><span class="word1"> l</span> </a>
-
-
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav container">
 
 
             <li class="nav-item active">
@@ -90,18 +90,18 @@
     </nav>
 
     <div class="toolbar">
-        <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block add-element"
-                data-toggle="modal" id='addElement' data-target="#newElement" data-placement="left"
+        <button type="button" class="btn tooltip-feature btn-outline-cus btn-default btn-circle btn-block add-element"
+                data-toggle="modal" id='addElement' data-target="#newElement" data-placement="right"
                 title="Create New Element">
             <i class="fa fa-plus fa-1x"></i></button>
-        <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block"
-                data-toggle="modal" data-placement="left" title="Element delete"
+        <button type="button" class="btn btn-outline-cus tooltip-feature btn-default btn-circle btn-block"
+                data-toggle="modal" data-placement="right" title="Element delete"
                 data-target="#elementInfo"><i class="fa fa-trash fa-1x"></i></button>
 
 
     </div>
     <span class="tag tag-default tag-pill pull-xs-right" id="sample"></span>
-    <div class="deploy container" style="position: absolute; right: 0;bottom:0; margin: 1%;">
+    <div class="deploy container" style="opacity:0;position: absolute; right: 0;bottom:0; margin: 1%;">
         <button type="button" class="btn btn-outline-mute text-muted btn-block btn-lg" data-toggle="modal"
 
                 data-target="#other" id="deploy">Deploy <i class="fa  fa-paper-plane  fa-1x"></i></button>
@@ -110,9 +110,9 @@
 
     <!-- iStack:0 : Different categories and functions = Shapes & Tags -->
     <!-- iStack:1 : Canvas scrolling like node red project -->
-    <div class="canvasDiv">
-        <canvas id="networkCanvas"></canvas>
-    </div>
+
+    <div class="canvasDiv"><canvas id="networkCanvas"></canvas></div>
+
     <!-- End main content-->
 
 </div>

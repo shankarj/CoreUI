@@ -61,8 +61,8 @@ function drawRoundedRectElement(paperObject, color, groupId) {
 
     var linesegL = new paperObject.Path(firstLeftSegment, secondLeftSegment);
     var linesegR = new paperObject.Path(firstRightSegment, secondRightSegment);
-    linesegR.strokeColor = 'black';
-    linesegL.strokeColor = 'black';
+    linesegR.strokeColor = '#F0F0F0';
+    linesegL.strokeColor = '#F0F0F0';
 
     var connectorLeft = new paperObject.Path.Circle({
         name: "left-" + groupId,

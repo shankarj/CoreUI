@@ -1,24 +1,70 @@
-
-canvas {
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-    
+html {
+    overflow: hidden;
 }
 
+.tooltip {
+    font-family: Montserrat;
+    font-size: 12px;
+
+}
+
+.tooltip.tooltip-left {
+
+}
+
+/*
+Custom outline
+*/
+
+.btn-outline-cus {
+    border-color: #ffffff;
+}
+
+.btn-outline-cus:hover {
+    color: #5bc0de;
+    background-image: none;
+    background-color: #455A64;
+    border-color: #ffffff;
+}
+
+.wrapper {
+    background-color: #263238;
+
+}
+
+.canvasDiv {
+    margin: 1%;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+
+}
+
+canvas {
+    width: inherit;
+    height: inherit;
 
 
-.nav > .nav-item.active::after {
+}
+
+.nav {
+    height: 12px;
+    width: auto;
+}
+
+.nav > .nav-item.active:after {
     content: "";
     width: 0px;
     height: 0px;
     position: absolute;
     bottom: 0px;
-    margin-left: 30px;
-    top: 35px;
-    border-width: 20px;
+    margin-left: 32px;
+    top: 53px;
+    border-width: 13px;
+
     border-style: outset outset solid;
-    border-color: transparent transparent #E0E0E0;
+    border-color: transparent transparent #00838F;
+    transition: opacity 0.4s ease-out;
 
 }
 
@@ -77,11 +123,24 @@ canvas {
 }
 
 nav {
-    background-color: #4a4a4a;
+    background-color: #f0f0f0;
+    width: auto;
+
 }
 
 .nav-item > a > h1, h2, h3, h4, h5, h6 {
     color: #f0f0f0;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26.4px;
+    letter-spacing: 1.5px;
+    margin-top: -1px;
+    padding-top: 10px;
+    color: #607D8B;
+
 }
 
 .card > ul > li {
@@ -92,17 +151,18 @@ nav {
 
 nav {
 
-    border-bottom: 10px solid #E0E0E0;
-    font-size : 8px;
-    font-family:'Helvetica';
+    border-bottom: 10px solid #00838F;
+    font-size: 8px;
+
 }
 
 .navbar-brand {
+
     color: #E0E0E0;
     letter-spacing: -6px;
     font-size: 36px;
     color: #fefefe;
-    font: 36px 'Arial Narrow', sans-serif;
+    font: 26px 'Arial Narrow', sans-serif;
     text-transform: capitalize;
 
 }
@@ -116,7 +176,7 @@ nav {
 
 /* stuff for 1st word */
 .navbar-brand .word1 {
-
+    color: transparent;
     text-transform: capitalize;
     margin-left: -2px;
     letter-spacing: -2px;
@@ -129,26 +189,24 @@ nav {
 .navbar-brand .word2 {
     z-index: 10; /* stack 2nd word below */
     font-weight: 500;
-
-
     color: #0097A7;
 }
 
 .toolbar {
-    right: 0px;
+    left: 18px;
     position: fixed;
     padding-right: 4%;
-padding-top:2%;
-    z-index : 2;
-}
-
-.toolbar > * {
+    padding-top: 2%;
+    z-index: 2;
 
 }
 
 .toolbar > button {
-    margin: 15%;
-    background-color: #009688;
+    margin-top: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 30%;
+    background-color: #263238;
 }
 
 .toolbar > button > i {
@@ -171,9 +229,6 @@ padding-top:2%;
 .tree-toggler {
 
 }
-
-
-
 
 .tree > li.card {
 

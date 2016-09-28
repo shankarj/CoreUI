@@ -2665,6 +2665,9 @@ a.btn.disabled, fieldset[disabled] a.btn {
     border-color: #fff
 }
 
+
+
+/*standard*/
 .btn-outline-info {
     color: #5bc0de;
     background-image: none;

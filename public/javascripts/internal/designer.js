@@ -595,7 +595,7 @@ function drawElement(elementType, elementId, color, det) {
         elementClicked = true;
         selectedElementObj = this;
         var content = group.name;
-        placeDiv(event.point.x, event.point.y + 20, content)
+        placeDiv(event.point.x, event.point.y, content)
     }
     group.onMouseDrag = function (event) {
 
@@ -651,7 +651,7 @@ var drawGridLines = function () {
  * Flow starts here
  */
 $(document).ready(function () {
-    drawGridLines();
+    // drawGridLines();
 
 
     $('#deploy').click(function () {
@@ -663,7 +663,7 @@ $(document).ready(function () {
 
 
     // drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
-    drawProperty("somethingelse", "another", "#424242", null);
+    drawProperty("somethingelse", "another", "#FFFFFF", null);
 
 
 });
@@ -709,6 +709,6 @@ $('#newElement').on('shown.bs.modal', function () {
 });
 $('.add-element-submit').click(function (event) {
     // printInConsole();
-    drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#E0E0E0', details_);
+    drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#FFFFFF', details_);
     reset();
 })
