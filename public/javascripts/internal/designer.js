@@ -662,7 +662,7 @@ $(document).ready(function () {
 
 
     // drawProperty("somethingelse", "propertyElementSelected", "#424242", null);
-    drawProperty("somethingelse", "another", "#FFFFFF", null);
+    drawProperty("somethingelse", "another", "#262938", null);
 
 
 });

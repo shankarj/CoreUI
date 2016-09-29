@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
@@ -41,12 +41,9 @@
 </head>
 
 <body>
+
 <div class="wrapper">
-
-    <!-- Header-->
-    <!--<a href="#" class="navbar-brand"><span class="word2">dexe</span><span class="word1"> l</span> </a>-->
-
-    <nav class="navbar navbar-dark" role="navigation" style="border-radius: ">
+    <nav class="navbar navbar-dark" role="navigation">
 
         <ul class="nav navbar-nav container">
 
@@ -92,35 +89,29 @@
 
     </nav>
 
-    <div class="toolbar">
-        <button type="button" class="btn tooltip-feature btn-outline-cus btn-default btn-circle btn-block add-element"
-                data-toggle="modal" id='addElement' data-target="#newElement" data-placement="right"
-                title="Create New Element">
-            <i class="fa fa-plus fa-1x"></i></button>
-        <button type="button" class="btn btn-outline-cus tooltip-feature btn-default btn-circle btn-block"
-                data-toggle="modal" data-placement="right" title="Element delete"
-                data-target="#elementInfo"><i class="fa fa-trash fa-1x"></i></button>
-
-
-    </div>
     <span id="sample"></span>
-    <div class="deploy container" style="opacity:0;position: absolute; right: 0;bottom:0; margin: 1%;">
-        <button type="button" class="btn btn-outline-mute text-muted btn-block btn-lg" data-toggle="modal"
+    <div class="row main-content-wrapper">
 
-                data-target="#other" id="deploy">Deploy <i class="fa  fa-paper-plane  fa-1x"></i></button>
-
+        <div class="toolbar col-sm-1">
+            <button type="button"
+                    class="btn tooltip-feature btn-circle btn-block add-element"
+                    data-toggle="modal" id='addElement' data-target="#newElement" data-placement="right"
+                    title="Create New Element" style="background-color: transparent;">
+                <i class="fa fa-plus fa-1x" style="color : var(--btn-hover);"></i></button>
+            <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block"
+                    data-toggle="modal" data-placement="right" title="Element delete"
+                    style="background-color: transparent;"
+                    data-target="#elementInfo"><i class="fa fa-trash fa-1x" style="color : var(--btn-hover);"></i>
+            </button>
+        </div>
+        <div class="canvas-container col-lg-11">
+            <canvas id="networkCanvas"></canvas>
+        </div>
     </div>
-
-    <!-- iStack:0 : Different categories and functions = Shapes & Tags -->
-    <!-- iStack:1 : Canvas scrolling like node red project -->
-
-    <div class="canvasDiv">
-        <canvas id="networkCanvas"></canvas>
-    </div>
-
     <!-- End main content-->
 
 </div>
+
 
 <!-- New Connection Modal-->
 <div class="modal fade" id="newConnection" tabindex="-1" role="dialog">
