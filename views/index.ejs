@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
@@ -46,8 +46,6 @@
     <nav class="navbar navbar-dark" role="navigation">
 
         <ul class="nav navbar-nav container">
-
-
             <li class="nav-item active">
                 <a href="#" class="btn btn-block">
                     <h4>Home</h4>
@@ -94,11 +92,11 @@
 
         <div class="toolbar col-sm-1">
             <button type="button"
-                    class="btn tooltip-feature btn-circle btn-block add-element"
+                    class="btn tooltip-feature btn-circle cus-btn btn-block add-element"
                     data-toggle="modal" id='addElement' data-target="#newElement" data-placement="right"
                     title="Create New Element" style="background-color: transparent;">
                 <i class="fa fa-plus fa-1x" style="color : var(--btn-hover);"></i></button>
-            <button type="button" class="btn tooltip-feature btn-default btn-circle btn-block"
+            <button type="button" class="btn tooltip-feature btn-default cus-btn btn-circle btn-block"
                     data-toggle="modal" data-placement="right" title="Element delete"
                     style="background-color: transparent;"
                     data-target="#elementInfo"><i class="fa fa-trash fa-1x" style="color : var(--btn-hover);"></i>
@@ -199,15 +197,15 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-justify">Create New Element</h4>
+                <h3 class="modal-title text-justify">Add new element</h3>
             </div>
             <div class="modal-body row">
-                <div class="col-lg-5">
-                    <ul class="nav nav-list container" id="element">
+                <div class="col-lg-3 nav-elements">
+                    <ul class="nav of nav-stacked" id="element">
 
                     </ul>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-9">
                     <h4 class="element text-primary">Element </h4>
 
                     <p class="desc text-primary">Description</p>

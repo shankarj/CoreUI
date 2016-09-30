@@ -667,6 +667,7 @@ $(document).ready(function () {
 
 });
 $('#newElement').on('shown.bs.modal', function () {
+
     $.ajax({
         url: "http://localhost:8083/api/elements/all/admin",
         crossDomain: true
@@ -681,7 +682,7 @@ $('#newElement').on('shown.bs.modal', function () {
             var eid = data[i].element_id;
 //Append every element with it's category
             // On radio button checked trigger the event. A change that has to be done for good UX.
-            $('#element').append('<li><label class="tree-toggler nav-header h3">' + categ + '</label><ul class="nav nav-list tree"><li class="h5 offset-lg-2" ><a href="#" id="' + eid + '"><label class="radio-inline"> <input name="radioGroup" id="radio1" value="option1" type="radio" checked=""></label></a>&nbsp;<span>' + name + '</span></li></li></ul></li>')
+            $('#element').append('<li><ul class="nav of nav-stacked"><li class="tq">' + categ + '</li><li class=" btn" id="' + eid + '">' + name + '</li></ul></li>')
 
 
             $('#' + data[i].element_id).click(function () {
@@ -690,9 +691,9 @@ $('#newElement').on('shown.bs.modal', function () {
                     url: "http://localhost:8083/api/elements/details/" + this.id,
                     crossDomain: true
                 }).done(function (data) {
-                    $('.element').html($(currentElement).parent().parent().siblings().html());
+                    $('.element').html($(currentElement).siblings().html());
                     $('.desc').html(data["description_json"])
-                    elementName_ = $(currentElement).parent().parent().siblings().html();
+                    elementName_ = $(currentElement).siblings().html();
                     elementId_ = currentElement.id;
                     category_ = $(currentElement).siblings().html();
                     details_ = data;
@@ -708,6 +709,7 @@ $('#newElement').on('shown.bs.modal', function () {
 });
 $('.add-element-submit').click(function (event) {
     // printInConsole();
-    drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#FFFFFF', details_);
+
+    drawElement("rect", elementId_ + (Object.keys(networkElements).length + 1), '#262938', details_);
     reset();
 })

@@ -3,7 +3,8 @@
     /*Navigation Active Arrow*/
     --nav-font: #607D8B;
     --nav-bg: #f0f0f0;
-    --active-arrow: #AD1457;
+    --nav-active-font : #277be6;
+    --active-arrow: #607D8B;
 
     /*Canvas*/
     --canvas-bg: #262938;
