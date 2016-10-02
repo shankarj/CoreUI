@@ -1,13 +1,14 @@
 
 :root {
     /*Navigation Active Arrow*/
-    --nav-font: #607D8B;
-    --nav-bg: #f0f0f0;
-    --nav-active-font : #277be6;
+    --nav-font: #F0F0F0;
+    --nav-bg: #212121;
+    --nav-active-bg: #98C93C;
+    --nav-active-font: #F0F0F0;
     --active-arrow: #607D8B;
 
     /*Canvas*/
-    --canvas-bg: #262938;
+    --canvas-bg: #E0E0E0;
 
     /*btn*/
     --btn-hover: #455A64;

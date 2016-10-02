@@ -16,9 +16,22 @@ $(function () {
         $(this).parent().children('ul.tree').toggle(300);
     });
 
+    $('#nav-projects').click(function () {
 
+        window.location = "/projects"
+
+    })
+
+    $('#nav-home').click(function () {
+
+        window.location = "/"
+
+    })
 
 
 })
 
 
+$(document).ready(function () {
+
+})
