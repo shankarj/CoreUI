@@ -140,7 +140,7 @@ nav.navbar {
     background: var(--nav-bg);
     padding-top: 0;
     height: 56px;
-
+    padding-left: 20%
 }
 
 .navbar > ul {
@@ -283,7 +283,7 @@ nav.navbar {
 
 .modal-body {
     background: white;
-    color: var(--nav-font);
+    color: var(--modal-font);
     margin: 0px;
 
 }
@@ -311,5 +311,13 @@ Projects Page Stylesheet
     padding: 2%;
     border-radius: 10px;
     height: 25%;
+
+}
+
+.snapshot-wrapper {
+
+    background: white;
+
+
 
 }

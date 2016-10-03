@@ -1,6 +1,7 @@
 
 :root {
     /*Navigation Active Arrow*/
+    --modal-font : #757575;
     --nav-font: #F0F0F0;
     --nav-bg: #212121;
     --nav-active-bg: #98C93C;

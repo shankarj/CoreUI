@@ -45,39 +45,59 @@
 <div class="wrapper">
 
     <%- include("navbar.ejs",{projects:"active",datasets:"inactive",home:"inactive"}) %>
+    <div class="projects-container">
 
-    <div class="project-wrapper">
+    </div>
 
-        <div class="row">
-            <div class="col-md-6 offset-sm-1" >
 
-                <div class="row">
-                    <span class="h3 font-weight-bold">Project Name</span>
-                </div>
-                <div class="row" style="padding-top: 5%;margin-bottom:0%">
-                    <label>Project ID : Value</label>
+    <!-- End main content-->
 
-                </div>
-                <div class="row">
-                    <label>Project Type : AGENT</label>
+</div>
+<div class="modal fade" id="snapshots-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-justify">Project Information</h4>
+            </div>
+            <div class="modal-body row snapshot-wrapper">
+                <ul class="nav of nav-stacked col-md-4 nav-elements" id="snapshots">
 
-                </div>
-                <div class="row">
-                    <label>Last Updated : 12 Sep 2016</label>
-
+                </ul>
+                <div class="col-md-8">
+                    <span class="h4">Snapshot Name 1</span>
+                    <br><br>
+                    <span class="">Snapshot id : abcded </span>
+                    <br><br>
+                    <span class="">Last updated : 12-Oct-2016</span>
+                    <br><br>
+                    <span class="">Deployment Status : <span class="tag tag-warning btn-circle "
+                                                             style="position:absolute;margin-left: 3%;width:25px;height:25px;"> </span></span>
+                    <br><br>
+                    <span class="">Description</span>
+                    <p class="text-justify m-l-6">
+                        Using color to add meaning only provides a visual indication, which will not be conveyed
+                        to users of assistive technologies – such as screen readers. Ensure that information denoted by
+                        the color is either obvious from the content itself (e.g. the visible text), or is included
+                        through alternative means, such as additional text hidden with the .sr-only class.</p>
+                    <div>
+                        <div class="m-t-3">
+                            <button type="button" class="btn btn-danger col-lg-3 offset-lg-1" data-dismiss="modal"
+                                    style="padding: 1.5% ">Delete
+                            </button>
+                            <button type="button" class="btn btn-info col-lg-3 offset-lg-1" data-dismiss="modal"
+                                    style="padding: 1.5% ">Clone
+                            </button>
+                            <button type="button" class="btn btn-success col-lg-3 offset-lg-1" style="padding: 1.5% ">
+                                Open
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-5" style="padding-top: 5%">
 
-                <button type="button" class="btn btn-danger offset-sm-1">Delete</button>
-                <button type="button" class="btn btn-info offset-sm-1">Clone</button>
-                <button type="button" class="btn btn-success offset-sm-1">Open</button>
-            </div>
         </div>
 
     </div>
-    <!-- End main content-->
-
 </div>
 
 <!-- End wrapper-->
